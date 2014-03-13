@@ -14,3 +14,10 @@
        'no open only close' GollumGollum
 
 - Add the missing regexp to the microsyntax, old were wrong  
+
+- implement entities to match with the parser
+
+- implement parser Expresopms to match with GollumScript grammar
+
+
+

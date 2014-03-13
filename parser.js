@@ -75,6 +75,14 @@ function parseDeclaration() {
   }
 }
 
+function parseType() {
+  if (at(['Riddle','Num','Str','Chr','<>','[]', 'ring','it',])) {
+    // Eventually: something like return Type.forName(match().lexeme)
+  } else {
+    error('Type expected', tokens[0])
+  }
+}
+
 function parseVarDec() {
   parseType()
   match('ID')
@@ -89,15 +97,7 @@ function parseVarDec() {
   }
 }
 
-function parseType() {
-  if (at(['Riddle','Num','Str','Chr','<>','[]'])) {
-    // Eventually: something like return Type.forName(match().lexeme)
-  } else {
-    error('Type expected', tokens[0])
-  }
-}
-
-function ClassDec() {
+function parseClassDec() {
   match('makeThing')
   match('ID')
   do {
@@ -105,14 +105,28 @@ function ClassDec() {
   } while (at([]))
 }
 
+function parseFunctDec(){
+  match('makeMagic')
+  match('ID')
+  parseParams()
+  parseBlock()
+}
 
-
+function parseParams(){
+  match('(')
+  parseType()
+  match('ID')
+  while(at(',')){
+    parseType()
+  match('ID')
+  }
+}
 
 function parseAssignmentStatement() {
-  var target = new VariableReference(match('ID'))
+  // Eventually: something like var target = new VariableReference(match('ID'))
   match('=')
   var source = parseExpression()
-  return new AssignmentStatement(target, source)
+  // Eventually: something like return new AssignmentStatement(target, source)
 }
 
 function parseReadStatement() {
