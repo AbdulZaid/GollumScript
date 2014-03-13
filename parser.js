@@ -9,19 +9,19 @@
 var scanner = require('./scanner')
 var error = require('./error')
 
-var Program = require('./entities/program')
-var Block = require('./entities/block')
-var Type = require('./entities/type')
-var VariableDeclaration = require('./entities/variabledeclaration')
-var AssignmentStatement = require('./entities/assignmentstatement')
-var ReadStatement = require('./entities/readstatement')
-var WriteStatement = require('./entities/writestatement')
-var WhileStatement = require('./entities/whilestatement')
-var IntegerLiteral = require('./entities/integerliteral')
-var BooleanLiteral = require('./entities/booleanliteral')
-var VariableReference = require('./entities/variablereference')
-var BinaryExpression = require('./entities/binaryexpression')
-var UnaryExpression = require('./entities/unaryexpression')
+// var Program = require('./entities/program')
+// var Block = require('./entities/block')
+// var Type = require('./entities/type')
+// var VariableDeclaration = require('./entities/variabledeclaration')
+// var AssignmentStatement = require('./entities/assignmentstatement')
+// var ReadStatement = require('./entities/readstatement')
+// var WriteStatement = require('./entities/writestatement')
+// var WhileStatement = require('./entities/whilestatement')
+// var IntegerLiteral = require('./entities/integerliteral')
+// var BooleanLiteral = require('./entities/booleanliteral')
+// var VariableReference = require('./entities/variablereference')
+// var BinaryExpression = require('./entities/binaryexpression')
+// var UnaryExpression = require('./entities/unaryexpression')
 
 var tokens
 
@@ -32,50 +32,81 @@ module.exports = function (scannerOutput) {
   return program
 }
 
-function parseProgram() {
-  return new Program(parseBlock())
+function parseScript() {
+  //return new Program(parseBlock())
+  do {
+    parseStatement()
+  } while (!at(EOF))
 }
 
 function parseBlock() {
-  var statements = []
   do {
-    statements.push(parseStatement())
-    match(';')
-  } while (at(['var','ID','read','write','while']))
-  return new Block(statements)
+    parseStatement()
+  } while (!at('GollumGollum'))
 }
 
 function parseStatement() {
-  if (at('var')) {
-    return parseVariableDeclaration()
+  if (at(['Riddle','Num','Str','Chr','<>','[]','ring','makeThing','makeMagic'])) {
+    return parseDeclaration()
   } else if (at('ID')) {
-    return parseAssignmentStatement()
-  } else if (at('read')) {
-    return parseReadStatement()
-  } else if (at('write')) {
-    return parseWriteStatement()
-  } else if (at('while')) {
-    return parseWhileStatement()
+    return parseAssignment()
+  } else if (at('ifes')) {
+    return parseConditional()
+  } else if (at('whilees')) {
+    return parseWhile()
+  } else if (at('revolves')) {
+    return parseFor()
+  } else if (at('givesUs')) {
+    return parseReturn()
+  } else if (at('printes')) {
+    return parsePrint()
   } else {
     error('Statement expected', tokens[0])
   }
 }
 
-function parseVariableDeclaration() {
-  match('var')
-  var id = match('ID')
-  match(':')
-  var type = parseType()
-  return new VariableDeclaration(id, type)
+function parseDeclaration() {
+  if (at(['Riddle','Num','Str','Chr','<>','[]','ring'])) {
+    parseVariableDec()
+  } else (at('makeThing')) {
+    parseClassDec()
+  } else {
+    parseFuncDec()
+  }
+}
+
+function parseVarDec() {
+  parseType()
+  match('ID')
+  while (at(',')) {
+    match(',')
+    match('ID')
+  }
+  match('=')
+  parseExp()
+  while (at(',')) {
+    parseExp()
+  }
 }
 
 function parseType() {
   if (at(['Riddle','Num','Str','Chr','<>','[]'])) {
-    return Type.forName(match().lexeme)
+    // Eventually: something like return Type.forName(match().lexeme)
   } else {
     error('Type expected', tokens[0])
   }
 }
+
+function ClassDec() {
+  match('makeThing')
+  match('ID')
+  do {
+    parseVarDec()
+  } while (at([]))
+}
+
+
+
 
 function parseAssignmentStatement() {
   var target = new VariableReference(match('ID'))
