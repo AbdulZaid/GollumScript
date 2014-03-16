@@ -68,7 +68,7 @@ function parseStatement() {
 function parseDeclaration() {
   if (at(['Riddle','Num','Str','Chr','<>','[]','ring'])) {
     parseVariableDec()
-  } else (at('makeThing')) {
+  } else if (at('makeThing')) {
     parseClassDec()
   } else {
     parseFuncDec()
