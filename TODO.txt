@@ -1,9 +1,14 @@
+
+/*****************************/
+/******* SCANNER STUFF *******/
+/*****************************/
+
 - Add float numbers to the scanner
 
-- Implement array functionality. For instance
+- Implement array functionality. For instance:
      array of numbers : Num[]
      array of strings : Str[]
-     arrayh of objects: ring[]
+     array of objects: ring[]
 
 - Add rings to scanner and scanner test
 
@@ -15,9 +20,26 @@
 
 - Add the missing regexp to the microsyntax, old were wrong  
 
-- implement entities to match with the parser
+/*****************************/
+/******* PARSER STUFF ********/
+/*****************************/
 
-- implement parser Expresopms to match with GollumScript grammar
 
+- Implement entities to match with the parser
 
+- Implement parser Expressions to match with GollumScript grammar
 
+- Implement 'EOF' so that match('EOF') passes thest in parser
+
+- Finish working on all remaining entitites
+
+- Finish parser and parser unit test
+      
+      Do the following:
+      
+      > Run mocha to figure out where the test-syntax-errors.js is not working
+
+      > Modify parser, entities, and .gs programs so they pass all the tests
+
+      > During this process we might need to modify some stuff from the syntax, so
+        make proper changes to keep consistency

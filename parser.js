@@ -27,9 +27,9 @@ var tokens
 
 module.exports = function (scannerOutput) {
   tokens = scannerOutput
-  var program = parseProgram()
+  var script = parseScript()
   match('EOF')
-  return program
+  return script
 }
 
 function parseScript() {
@@ -44,6 +44,8 @@ function parseBlock() {
     parseStatement()
   } while (!at('GollumGollum'))
 }
+
+
 
 function parseStatement() {
   if (at(['Riddle','Num','Str','Chr','<>','[]','ring','makeThing','makeMagic'])) {
