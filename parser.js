@@ -9,8 +9,8 @@
 var scanner = require('./scanner')
 var error = require('./error')
 
-// var Program = require('./entities/program')
-// var Block = require('./entities/block')
+var Program = require('./entities/program')
+var Block = require('./entities/block')
 // var Type = require('./entities/type')
 // var VariableDeclaration = require('./entities/variabledeclaration')
 // var AssignmentStatement = require('./entities/assignmentstatement')

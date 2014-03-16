@@ -18,16 +18,16 @@ describe('The parser', function () {
 
   var checks = {
     'detects error at empty program': 'empty',
-    'detects errors at start of statement': 'bad-statement',
-    'detects unknown types': 'bad-type',
-    'detected bad expressions in assignments': 'bad-expr-in-assignment',
-    'detects a missing loop keyword': 'missing-loop',
-    'detects a missing end keyword': 'missing-end',
-    'detects missing commas in read statements': 'no-comma-in-read',
-    'detects missing commas in write statements': 'no-comma-in-write',
-    'detects unbalanced parentheses': 'unbalanced-parens',
-    'detects a missing semicolon after a variable declaration': 'no-semicolon',
-    'detects multiple relational operators without parentheses': 'multiple-relationals'
+    //'detects errors at start of statement': 'bad-statement',
+    //'detects unknown types': 'bad-type',
+    //'detected bad expressions in assignments': 'bad-expr-in-assignment',
+    //'detects a missing loop keyword': 'missing-loop',
+    //'detects a missing end keyword': 'missing-end',
+    //'detects missing commas in read statements': 'no-comma-in-read',
+    //'detects missing commas in write statements': 'no-comma-in-write',
+    //'detects unbalanced parentheses': 'unbalanced-parens',
+    //'detects a missing semicolon after a variable declaration': 'no-semicolon',
+    //'detects multiple relational operators without parentheses': 'multiple-relationals'
   };
 
   for (var check in checks) {
