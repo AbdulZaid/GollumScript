@@ -11,7 +11,7 @@ var error = require('./error')
 
 var Program = require('./entities/program')
 var Block = require('./entities/block')
-// var Type = require('./entities/type')
+var Type = require('./entities/type')
 // var VariableDeclaration = require('./entities/variabledeclaration')
 // var AssignmentStatement = require('./entities/assignmentstatement')
 // var ReadStatement = require('./entities/readstatement')
@@ -123,11 +123,11 @@ function parseParams(){
   }
 }
 
-function parseAssignmentStatement() {
+function parseAssignment() {
   // Eventually: something like var target = new VariableReference(match('ID'))
   match('=')
   var source = parseExpression()
-  // Eventually: something like return new AssignmentStatement(target, source)
+  // Eventually: something like return new Assignment(target, source)
 }
 
 function parseConditional() {
@@ -136,7 +136,7 @@ function parseConditional() {
   var 
 }
 
-function parseWhileStatement() {
+function parseWhile() {
   match('whiles') 
   var condition = parseExpression()
   var body = parseBlock()
