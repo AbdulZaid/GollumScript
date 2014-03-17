@@ -2,7 +2,6 @@
 /******* SCANNER STUFF *******/
 /*****************************/
 
-- Add float numbers to the scanner
 
 - Implement array functionality. For instance:
      array of numbers : Num[]
