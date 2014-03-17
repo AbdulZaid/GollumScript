@@ -185,7 +185,7 @@ Numbers in Gollum can be denoted as octal, hexadecimal, or decimal. Octal number
       Comment		::= ~~ for single line comments |  ~* here goes a block comment*~
       Id     		::= '_'?[a-z]+ ([-_a-z0-9])*
       NumLit 		::= [0-9]+ ('.' [0-9]*)?
-      StrLit 		::= '"' a string of basic latin that is not a reserved expresion for breaking line,or a quote '"'
+      StrLit 		::= '"' ( NumLit | [a-Z])* '"'
 
 **SAMPLE PROGRAMS**
 
