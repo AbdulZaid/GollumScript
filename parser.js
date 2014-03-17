@@ -152,15 +152,16 @@ function parseWhile() {
   match('whiles') 
   var condition = parseExpression()
   var body = parseBlock()
-  match('end')
   return new WhileStatement(condition, body)
 }
- 
+
+// Chase: Unsure of the syntax diagram equivalent of the For syntax
 function parseFor() {
   match('revolves')
   match('ID')
   var condition = parseExpression()
-  
+  var body = parseBlock()
+  // Eventually: something like return new ForStatement(condition, body)
 }  
  
 function parseReturn() {
