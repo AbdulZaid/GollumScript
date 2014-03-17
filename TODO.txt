@@ -12,7 +12,8 @@
 - Add rings to scanner and scanner test
 
 
-- Add the missing regexp to the microsyntax, old were wrong  
+- Add the missing regexp to the microsyntax, old were wrong  // So far, StrLit has been modified, 
+//still we need to fix a scanner condition for it.
 
 /*****************************/
 /******* PARSER STUFF ********/
