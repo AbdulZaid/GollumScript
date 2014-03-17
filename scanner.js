@@ -81,7 +81,7 @@ function scan(line, linenumber, tokens) {
           pos++
           while(/\d/.test(line[pos])) pos++
        }
-       emit('INTLIT', line.substring(start, pos))
+       emit('NumLit', line.substring(start, pos))
           
           
     } else {

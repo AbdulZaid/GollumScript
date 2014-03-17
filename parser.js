@@ -236,7 +236,7 @@ function parseExp5() {
 function parseExp6() {
   if (at(['true','false'])) {
     return new BooleanLiteral.forName(match().lexeme)
-  } else if (at('INTLIT')) {
+  } else if (at('NumLit')) {
     return new IntegerLiteral(match())
   } else if (at('ID')) {
     return new VariableReference(match())

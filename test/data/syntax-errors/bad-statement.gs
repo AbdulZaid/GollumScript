@@ -1,4 +1,4 @@
-var x: int;
-read x;
+Num x;
+printes x;
 9 - 2;
-write x;
+givesUs x;

@@ -9,7 +9,7 @@ describe('The scanner', function () {
     scan('test/data/hello.gollum', function (tokens) {
       tokens.length.should.equal(4)
       i(tokens[0]).should.equal(i({kind:'givesUs',lexeme:'givesUs',line:1,col:1}))
-      i(tokens[1]).should.equal(i({kind:'INTLIT',lexeme:'0',line:1,col:9}))
+      i(tokens[1]).should.equal(i({kind:'NumLit',lexeme:'0',line:1,col:9}))
       i(tokens[2]).should.equal(i({kind:';',lexeme:';',line:1,col:10}))
       i(tokens[3]).should.equal(i({kind:'EOF',lexeme:'EOF'}))
       done()
@@ -97,10 +97,10 @@ describe('The scanner', function () {
   it('scans numbers properly', function (done) {
     scan('test/data/numbers', function (tokens) {
       i(tokens[0]).should.equal(i({kind:'ID',lexeme:'loop89x7',line:1,col:1}))
-      i(tokens[2]).should.equal(i({kind:'INTLIT',lexeme:'222289',line:1,col:10}))
+      i(tokens[2]).should.equal(i({kind:'NumLit',lexeme:'222289',line:1,col:10}))
       i(tokens[3]).should.equal(i({kind:'ID',lexeme:'while9',line:1,col:16}))
-      i(tokens[4]).should.equal(i({kind:'INTLIT',lexeme:'02',line:1,col:23}))
-      i(tokens[5]).should.equal(i({kind:'INTLIT',lexeme:'1.5',line:1,col:26}))
+      i(tokens[4]).should.equal(i({kind:'NumLit',lexeme:'02',line:1,col:23}))
+      i(tokens[5]).should.equal(i({kind:'NumLit',lexeme:'1.5',line:1,col:26}))
       done()
     })
   })
