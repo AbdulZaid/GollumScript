@@ -134,15 +134,17 @@ function parseAssignment() {
 function parseConditional() {
   match('ifes')
   var condition = parseExpression()
-  // Eventually: something like return new Assignment(target, source)
-  parseBlock()
+  var body = parseBlock()
+  // Eventually: something like return new Conditional(condition, body)
   while (at('ifElses')) {
-    var source = parseExpression()
-    // Eventually: something like return new Assignment(target, source)
-    parseBlock()
+    var condition = parseExpression()
+    var body = parseBlock()
+    // Eventually: something like return new Conditional(condition, body)
   }
   if (at('elses')) {
-    parseBlock()
+    var condition = null
+    var body = parseBlock()
+    // Eventually: something like return new Conditional(condition, body)
   }
 }
 
