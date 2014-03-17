@@ -68,7 +68,7 @@ function parseStatement() {
 
 function parseDeclaration() {
   if (at(['Riddle','Num','Str','Chr','<>','[]','ring'])) {
-    parseVariableDec()
+    parseVarDec()
   } else if (at('makeThing')) {
     parseClassDec()
   } else {
@@ -119,8 +119,9 @@ function parseParams(){
   match('ID')
   while(at(',')){
     parseType()
-  match('ID')
+    match('ID')
   }
+  match(')')
 }
 
 function parseAssignment() {
