@@ -1,4 +1,3 @@
-
 /*****************************/
 /******* SCANNER STUFF *******/
 /*****************************/
@@ -12,11 +11,6 @@
 
 - Add rings to scanner and scanner test
 
-- Change block syntax in scanner and scanner test 
-     Old:
-       'open' {  'close' GollumGollum
-     New:
-       'no open only close' GollumGollum
 
 - Add the missing regexp to the microsyntax, old were wrong  
 
