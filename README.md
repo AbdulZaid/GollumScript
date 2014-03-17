@@ -83,7 +83,7 @@ The Gollum language is designed by implementing the famous character “Gollum" 
        
 **CLASSES**
 
-       make Thing ring{
+       make Thing ring
            Num diameter = 10 
            Num height = 0.2
            Num width = 0.1
@@ -202,10 +202,10 @@ Numbers in Gollum can be denoted as octal, hexadecimal, or decimal. Octal number
       
       
       ~~ Returns the largest element in an array.
-      magic it max (a) {
+      magic it max (a) 
           it largest = a[0]
-          revolves (it i = 1; i <  a.thingsInIt; i ++) {
-              ifes (a[i] > largest) {
+          revolves (it i = 1; i <  a.thingsInIt; i ++) 
+              ifes (a[i] > largest) 
                  largest = a[i]
               GollumGollum
           GollumGollum
