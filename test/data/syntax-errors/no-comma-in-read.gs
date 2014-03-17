@@ -1,3 +1,3 @@
-var x: int;
-var y: int;
-read x y;
+Num x;
+Num y;
+printes x y;

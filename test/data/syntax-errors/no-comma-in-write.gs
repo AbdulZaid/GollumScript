@@ -1,1 +1,1 @@
-write 1 2;
+givesUs 1 2;

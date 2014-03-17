@@ -1,2 +1,2 @@
-var x: int;
-x = while + 2;
+it x;
+x = whiles + 2;

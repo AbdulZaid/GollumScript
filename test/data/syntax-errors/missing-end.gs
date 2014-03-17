@@ -1,2 +1,2 @@
-while true loop
-  write 1;
+whiles bless 
+	givesUs 1;

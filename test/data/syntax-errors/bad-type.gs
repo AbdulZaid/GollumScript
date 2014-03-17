@@ -1,1 +1,1 @@
-var y: zzzzzzz;
+Num y= zzzzzzz;

@@ -1,3 +1,2 @@
-while false or true
-  write 0;
-end;
+whiles thief or bless givesUs 0;
+GollumGollum;

@@ -1,2 +1,2 @@
-var x: int
-var y: int;
+it x
+it y;
