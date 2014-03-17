@@ -77,8 +77,13 @@ function scan(line, linenumber, tokens) {
     // Numeric literals
     } else if (/\d/.test(line[pos])) {
       while (/\d/.test(line[pos])) pos++
-      emit('INTLIT', line.substring(start, pos))
-    
+      if(/\./.test(line[pos])){
+          pos++
+          while(/\d/.test(line[pos])) pos++
+       }
+       emit('INTLIT', line.substring(start, pos))
+          
+          
     } else {
       error('Illegal character: ' + line[pos], {line: linenumber, col: pos+1})
       pos++
