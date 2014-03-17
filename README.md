@@ -219,7 +219,7 @@ Numbers in Gollum can be denoted as octal, hexadecimal, or decimal. Octal number
           it result = 0
           revolves (it i = 0; i < a.thingsInIt; i++ ) 
               result += a[i]
-           GollumGollum
-           givesUs result
+          GollumGollum
+          givesUs result
       GollumGollum
       
