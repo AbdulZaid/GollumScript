@@ -2,6 +2,7 @@
 /******* SCANNER STUFF *******/
 /*****************************/
 
+- Add a microsyntax. For example, BR = NEWLINE, then edit the block syntanx for it.
 
 - Implement array functionality. For instance:
      array of numbers : Num[]
