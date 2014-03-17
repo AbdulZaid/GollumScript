@@ -36,7 +36,7 @@ function parseScript() {
   //return new Program(parseBlock())
   do {
     parseStatement()
-  } while (!at(EOF))
+  } while (!at('EOF'))
 }
 
 function parseBlock() {
@@ -44,7 +44,6 @@ function parseBlock() {
     parseStatement()
   } while (!at('GollumGollum'))
 }
-
 
 
 function parseStatement() {
@@ -104,7 +103,7 @@ function parseClassDec() {
   match('ID')
   do {
     parseVarDec()
-  } while (at([]))
+  } while (at([9]))
 }
 
 function parseFunctDec(){
@@ -131,36 +130,48 @@ function parseAssignmentStatement() {
   // Eventually: something like return new AssignmentStatement(target, source)
 }
 
-function parseReadStatement() {
-  match('read')
+function parseConditional() {
+  match('ifes')
+  var condition = parseExpression()
+  var 
+}
+
+function parseWhileStatement() {
+  match('whiles') 
+  var condition = parseExpression()
+  var body = parseBlock()
+  match('end')
+  return new WhileStatement(condition, body)
+}
+ 
+function parseFor() {
+  match('revolves')
+  match('ID')
+  var condition = parseExpression()
+  
+}  
+ 
+function parseReturn() {
+  match('givesUs')
   var variables = []
   variables.push(new VariableReference(match('ID')))
   while (at(',')) {
     match()
     variables.push(new VariableReference(match('ID')))
   }
-  return new ReadStatement(variables)
+  return new Return(variables)
 }
 
-function parseWriteStatement() {
-  match('write')
+function parsePrint() {
+  match('printes')
   var expressions = []
   expressions.push(parseExpression())
   while (at(',')) {
     match()
     expressions.push(parseExpression())
   }
-  return new WriteStatement(expressions)
+  return new Print(expressions)
 }
-
-function parseWhileStatement() {
-  match('while')
-  var condition = parseExpression()
-  match('loop')
-  var body = parseBlock()
-  match('end')
-  return new WhileStatement(condition, body)
-}  
 
 function parseExpression() {
   var left = parseExp1()
