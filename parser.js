@@ -106,18 +106,18 @@ function parseClassDec() {
   } while (at([9]))
 }
 
-function parseFunctDec(){
+function parseFunctDec() {
   match('makeMagic')
   match('ID')
   parseParams()
   parseBlock()
 }
 
-function parseParams(){
+function parseParams() {
   match('(')
   parseType()
   match('ID')
-  while(at(',')){
+  while (at(',')) {
     parseType()
     match('ID')
   }
@@ -134,6 +134,16 @@ function parseAssignment() {
 function parseConditional() {
   match('ifes')
   var condition = parseExpression()
+  // Eventually: something like return new Assignment(target, source)
+  parseBlock()
+  while (at('ifElses')) {
+    var source = parseExpression()
+    // Eventually: something like return new Assignment(target, source)
+    parseBlock()
+  }
+  if (at('elses')) {
+    parseBlock()
+  }
 }
 
 function parseWhile() {
