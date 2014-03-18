@@ -42,7 +42,9 @@ function parseScript() {
 function parseBlock() {
   var statements = []
   do {
+
     statements.push(parseStatement())
+    
   } while (at(['Riddle','Num','Str','Chr','<>','[]','ring','makeThing','makeMagic']))
     match('GollumGollum')
     return new Block(statements)
@@ -130,7 +132,7 @@ function parseParams() {
 function parseAssignment() {
   var target = new VariableReference(match('ID'))
   match('=')
-  var source = parseExpression()
+  var source = parseExp()
   return new Assignment(target, source)
 }
 
