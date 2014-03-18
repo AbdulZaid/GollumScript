@@ -24,10 +24,10 @@ describe('The parser', function () {
     'detects a missing loop keyword': 'missing-loop',
     'detects a missing end keyword': 'missing-end',
     'detects missing commas in read statements': 'no-comma-in-read',
-    //'detects missing commas in write statements': 'no-comma-in-write',
-    //'detects unbalanced parentheses': 'unbalanced-parens',
+    'detects missing commas in write statements': 'no-comma-in-write',
+    'detects unbalanced parentheses': 'unbalanced-parens',
     'detects a missing semicolon after a variable declaration': 'no-semicolon',
-    //'detects multiple relational operators without parentheses': 'multiple-relationals'
+    'detects multiple relational operators without parentheses': 'multiple-relationals'
   };
 
   for (var check in checks) {
