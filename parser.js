@@ -12,16 +12,16 @@ var error = require('./error')
 var Program = require('./entities/program')
 var Block = require('./entities/block')
 var Type = require('./entities/type')
-// var VariableDeclaration = require('./entities/variabledeclaration')
-// var AssignmentStatement = require('./entities/assignmentstatement')
-// var ReadStatement = require('./entities/readstatement')
-// var WriteStatement = require('./entities/writestatement')
-// var WhileStatement = require('./entities/whilestatement')
-// var IntegerLiteral = require('./entities/integerliteral')
-// var BooleanLiteral = require('./entities/booleanliteral')
-// var VariableReference = require('./entities/variablereference')
-// var BinaryExpression = require('./entities/binaryexpression')
-// var UnaryExpression = require('./entities/unaryexpression')
+var VariableDeclaration = require('./entities/variabledeclaration')
+var AssignmentStatement = require('./entities/assignmentstatement')
+var ReadStatement = require('./entities/readstatement')
+var WriteStatement = require('./entities/writestatement')
+var WhileStatement = require('./entities/whilestatement')
+var IntegerLiteral = require('./entities/integerliteral')
+var BooleanLiteral = require('./entities/booleanliteral')
+var VariableReference = require('./entities/variablereference')
+var BinaryExpression = require('./entities/binaryexpression')
+var UnaryExpression = require('./entities/unaryexpression')
 
 var tokens
 
@@ -33,16 +33,19 @@ module.exports = function (scannerOutput) {
 }
 
 function parseScript() {
-  //return new Program(parseBlock())
+  return new Program(parseBlock())
   do {
     parseStatement()
   } while (!at('EOF'))
 }
 
 function parseBlock() {
+  var statements = []
   do {
-    parseStatement()
-  } while (!at('GollumGollum'))
+    statements.push(parseStatement())
+  } while (at(['Riddle','Num','Str','Chr','<>','[]','ring','makeThing','makeMagic']))
+    match('GollumGollum')
+    return new Block(statements)
 }
 
 
@@ -53,7 +56,7 @@ function parseStatement() {
     return parseAssignment()
   } else if (at('ifes')) {
     return parseConditional()
-  } else if (at('whilees')) {
+  } else if (at('whiles')) {
     return parseWhile()
   } else if (at('revolves')) {
     return parseFor()
@@ -77,8 +80,8 @@ function parseDeclaration() {
 }
 
 function parseType() {
-  if (at(['Riddle','Num','Str','Chr','<>','[]', 'ring','it',])) {
-    // Eventually: something like return Type.forName(match().lexeme)
+  if (at(['Riddle','Num','Str','Chr','<>','[]', 'ring','it'])) {
+    return Type.forName(match().lexeme)
   } else {
     error('Type expected', tokens[0])
   }
@@ -125,17 +128,17 @@ function parseParams() {
 }
 
 function parseAssignment() {
-  // Eventually: something like var target = new VariableReference(match('ID'))
+  var target = new VariableReference(match('ID'))
   match('=')
   var source = parseExpression()
-  // Eventually: something like return new Assignment(target, source)
+  return new Assignment(target, source)
 }
 
 function parseConditional() {
   match('ifes')
   var condition = parseExpression()
   var body = parseBlock()
-  // Eventually: something like return new Conditional(condition, body)
+  return new Conditional(condition, body)
   while (at('ifElses')) {
     var condition = parseExpression()
     var body = parseBlock()
@@ -150,7 +153,7 @@ function parseConditional() {
 
 function parseWhile() {
   match('whiles') 
-  var condition = parseExpression()
+  var condition = parseExp()
   var body = parseBlock()
   return new WhileStatement(condition, body)
 }
@@ -178,15 +181,15 @@ function parseReturn() {
 function parsePrint() {
   match('printes')
   var expressions = []
-  expressions.push(parseExpression())
+  expressions.push(parseExp())
   while (at(',')) {
     match()
-    expressions.push(parseExpression())
+    expressions.push(parseExp())
   }
   return new Print(expressions)
 }
 
-function parseExpression() {
+function parseExp() {
   var left = parseExp1()
   while (at('or')) {
     var op = match()
@@ -259,7 +262,7 @@ function parseExp6() {
     match(')')
     return expression
   } else {
-    error('Illegal start of expression', tokens[0])
+    error( 'Illegal start of expression', tokens[0])
   }
 }
 
