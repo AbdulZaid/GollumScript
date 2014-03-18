@@ -22,7 +22,7 @@ var BooleanLiteral = require('./entities/booleanliteral')
 var VariableReference = require('./entities/variablereference')
 var BinaryExpression = require('./entities/binaryexpression')
 var UnaryExpression = require('./entities/unaryexpression')
-
+var Return = require('./entities/return')
 var tokens
 
 module.exports = function (scannerOutput) {
@@ -44,7 +44,7 @@ function parseBlock() {
   do {
 
     statements.push(parseStatement())
-    
+
   } while (at(['Riddle','Num','Str','Chr','<>','[]','ring','makeThing','makeMagic']))
     match('GollumGollum')
     return new Block(statements)
