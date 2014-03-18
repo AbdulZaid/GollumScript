@@ -140,34 +140,30 @@ Numbers in Gollum can be denoted as octal, hexadecimal, or decimal. Octal number
 
 **SYNTAX**
 
-      Script  		::= Stmt+
-      Block   		::= Stmt+ 'GollumGollum'
-      Stmt    		::= Declaration
-                        |   Assignment
-                        |   Conditional
-                        |   While
-                        |   For
-                        |   Return
-                        |   Print
-                        
-      Declaration 	::= VarDec | ClassDec | FuncDec              
-      Type	        ::= 'Riddle' | 'Num' | 'Flt' | 'Str' | 'Chr' | '<>' | '[]' | 'ring' | 'it'
-      VarDec      	::= Type Id (Id)* '=' ',' Exp (Exp)*
-      ClassDec    	::= 'makeThing' Id VarDec+
-      FuncDec     	::= 'makeMagic' Id Params Block
-      Params            ::= '(' Type Id (',' Type Id)* ')'
+      Block         ::= Stmt+
+      Stmt          ::= Declaration
+                    |    Assignment
+                    |    'ifes'  '('  Exp  ')'  Block 'GollumGollum'  (  
+                         'ifelses'  '('  Exp  ')'  Block 'GollumGollum')*  ( 
+                         'elses'  '('  Exp  ')'  Block 'GollumGollum' )?  
+                    |    'revolves'  '('  (VarDec)?  ';'  Exp  ';'  Increment  ')'  Block  'GollumGollum'
+                    |    'whiles'  '('  Exp  ')'  Block  'GollumGollum'
+                    |    'givesUs' Exp
+                    |    'printes'  Exp
+
+
+      Declaration   ::= VarDec | ClassDec | FuncDec    
+      Type          ::= 'Riddle' | 'Num' | 'Flt' | 'Str' | 'Chr' | '[]' | 'ring' 
+      VarDec        ::= ('it' | Type) Assingment  (','  Assignment)*
+      Assignment    ::= Id '=' Exp
+      ClassDec      ::= 'makeThing' Id Assignment+
+      FuncDec       ::= 'makeMagic' Id Params Block
+      Params        ::= '(' Type Id (',' Type Id)* ')'
       
-      Assignment  	::= Id '=' Exp
-      Conditional 	::= 'ifes' Exp block ('ifElses' Exp Block)* (‘elses’ Block)?
-      While       	::= 'whiles' Exp Block
-      For         	::= 'revolves' Id Exp (Exp Exp?)? Block
-      Return      	::= 'givesUs' Exp
-      Print       	::= 'printes' Exp
-      
-      Exp   		::= Exp1 ('or' Exp1)*
-      Exp1  		::= Exp2 ('and' Exp2)*
-      Exp2  		::= Exp3 (( RelOp) Exp3)?
-      Exp3  		::= Exp4 (AddOp Exp4)*
+      Exp           ::= Exp1 ('or' Exp1)*
+      Exp1          ::= Exp2 ('and' Exp2)*
+      Exp2          ::= Exp3 (( RelOp) Exp3)?
+      Exp3          ::= Exp4 (AddOp Exp4)*
       EXP4          ::= Exp5 (MulOp Exp5)*
       EXP5          ::= (PrefixOp)? Exp6
       EXP6          ::=  'bless' | 'thief' | NumLit | StrLit | '(' Exp ')' | '[' Exp (',' Exp )* ']' |
