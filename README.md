@@ -146,7 +146,7 @@ Numbers in Gollum can be denoted as octal, hexadecimal, or decimal. Octal number
                     |    'ifes'  '('  Exp  ')'  Block 'GollumGollum'  (  
                          'ifelses'  '('  Exp  ')'  Block 'GollumGollum')*  ( 
                          'elses'  '('  Exp  ')'  Block 'GollumGollum' )?  
-                    |    'revolves'  '('  (VarDec)?  ';'  Exp  ';'  Increment  ')'  Block  'GollumGollum'
+                    |    'revolves'  '('  (VarDec)?  ';'  Exp  ';'  IncOp  ')'  Block  'GollumGollum'
                     |    'whiles'  '('  Exp  ')'  Block  'GollumGollum'
                     |    'givesUs' Exp
                     |    'printes'  Exp
@@ -159,21 +159,17 @@ Numbers in Gollum can be denoted as octal, hexadecimal, or decimal. Octal number
       ClassDec      ::= 'makeThing' Id Assignment+
       FuncDec       ::= 'makeMagic' Id Params Block
       Params        ::= '(' Type Id (',' Type Id)* ')'
+      IncOp         ::= '++' | '--'
       
       Exp           ::= Exp1 ('or' Exp1)*
       Exp1          ::= Exp2 ('and' Exp2)*
-      Exp2          ::= Exp3 (( RelOp) Exp3)?
-      Exp3          ::= Exp4 (AddOp Exp4)*
-      EXP4          ::= Exp5 (MulOp Exp5)*
-      EXP5          ::= (PrefixOp)? Exp6
+      Exp2          ::= Exp3 (('<' | '<=' | '==' | '!=' | '>=' | '>') Exp3)?
+      Exp3          ::= Exp4 ([+-] Exp4)*
+      EXP4          ::= Exp5 ([*/%] Exp5)*
+      EXP5          ::= ('-' | 'not')? Exp6
       EXP6          ::=  'bless' | 'thief' | NumLit | StrLit | '(' Exp ')' | '[' Exp (',' Exp )* ']' |
                          Id '(' Exp (',' Exp )* )
-      
-      AddOp         ::= '+' | '-'
-      MulOp         ::= '*' | '/' | '%'
-      RelOp         ::= '<' | '<=' | '==' | '!=' | '>=' | '>'
-      IncOp         ::= '++' | '--'
-      PrefixOp      ::= '-' | 'not'
+
       
       
 **MICROSYNTAX**
