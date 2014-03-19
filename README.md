@@ -120,11 +120,11 @@ Numbers in Gollum can be denoted as octal, hexadecimal, or decimal. Octal number
         revolves (it i = 0; i <= 100; i++)            for (var i = 0; i <= 100; i++) {
                 ifes (i % 15 == 0)  	                      if (i % 15 == 0) {
                         printes “Blessed"         		        console.log("FizzBuzz");
-                GollumGollum                                  } else if (i % 3 == 0) {
+                                                              } else if (i % 3 == 0) {
                                                                         console.log("Fizz");
                 ifElses (i % 5 == 0)                          } else if (i % 5 == 0) {
                         printes "Smeagol"                                   console.log("Buzz");
-                GollumGollum                                  } else {
+                                                              } else {
                 elses                                                  console.log(i);
                         printes i                             }
                 GollumGollum                          }
@@ -144,17 +144,18 @@ Numbers in Gollum can be denoted as octal, hexadecimal, or decimal. Octal number
       Block         ::= Stmt+
       Stmt          ::= Declaration
                     |    Assignment
-                    |    'ifes'  '('  Exp  ')'  Block 'GollumGollum'  (  
-                         'ifelses'  '('  Exp  ')'  Block 'GollumGollum')*  ( 
-                         'elses'  '('  Exp  ')'  Block 'GollumGollum' )?  
-                    |    'revolves'  '('  (VarDec)?  ';'  Exp  ';'  IncOp  ')'  Block  'GollumGollum'
+                    |    'ifes'  '('  Exp  ')'  Block
+                         ( 'ifelses'  '('  Exp  ')'  Block )*  
+                         ( 'elses'  '('  Exp  ')'  Block )? 
+                         'GollumGollum'
+                    |    'revolves'  '('  (VarDec)?  ';'  Exp  ';'  Id IncOp  ')'  Block  'GollumGollum'
                     |    'whiles'  '('  Exp  ')'  Block  'GollumGollum'
                     |    'givesUs' Exp
                     |    'printes'  Exp
 
 
       Declaration   ::= VarDec | ClassDec | FuncDec    
-      Type          ::= 'Riddle' | 'Num' | 'Flt' | 'Str' | 'Chr' | '[]' | 'ring' 
+      Type          ::= 'Riddle' | 'Num' | 'Flt' | 'Str' | 'Chr' | Type'[]' | 'ring' 
       VarDec        ::= ('it' | Type) Assingment  (','  Assignment)*
       Assignment    ::= Id '=' Exp
       ClassDec      ::= 'makeThing' Id Assignment+ 'GollumGollum'
