@@ -157,7 +157,7 @@ Numbers in Gollum can be denoted as octal, hexadecimal, or decimal. Octal number
       VarDec        ::= ('it' | Type) Assingment  (','  Assignment)*
       Assignment    ::= Id '=' Exp
       ClassDec      ::= 'makeThing' Id Assignment+
-      FuncDec       ::= 'makeMagic' Id Params Block
+      FuncDec       ::= 'makeMagic' Id Params Block 'GollumGollum'
       Params        ::= '(' Type Id (',' Type Id)* ')'
       IncOp         ::= '++' | '--'
       
@@ -168,7 +168,7 @@ Numbers in Gollum can be denoted as octal, hexadecimal, or decimal. Octal number
       EXP4          ::= Exp5 ([*/%] Exp5)*
       EXP5          ::= ('-' | 'not')? Exp6
       EXP6          ::=  'bless' | 'thief' | NumLit | StrLit | '(' Exp ')' | '[' Exp (',' Exp )* ']' |
-                         Id '(' Exp (',' Exp )* )
+                         Id '(' Exp (',' Exp )* 
 
       
       
