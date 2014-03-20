@@ -155,7 +155,7 @@ Numbers in Gollum can be denoted as octal, hexadecimal, or decimal. Octal number
 
 
       Declaration   ::= VarDec | ClassDec | FuncDec    
-      Type          ::= 'Riddle' | 'Num' | 'Flt' | 'Str' | 'Chr' | Type '[]' | 'ring' 
+      Type          ::= ('Riddle' | 'Num' | 'Flt' | 'Str' | 'Chr' | 'ring') ('['']')? 
       VarDec        ::= ('it' | Type) Assignment  (','  Assignment)*
       Assignment    ::= Id '=' Exp
       ClassDec      ::= 'makeThing' Id VarDec+ 'GollumGollum'
