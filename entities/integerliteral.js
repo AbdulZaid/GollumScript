@@ -9,7 +9,7 @@ IntegerLiteral.prototype.toString = function () {
 }
 
 IntegerLiteral.prototype.analyze = function (context) {
-  this.type = Type.INT
+  this.type = Type.NUM
 }
 
 module.exports = IntegerLiteral

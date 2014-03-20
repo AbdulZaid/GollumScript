@@ -1,4 +1,4 @@
-Str a = "p";
-printes x;
+Num a = p
+printes a
 9 - 2;
-givesUs x;
+givesUs a;

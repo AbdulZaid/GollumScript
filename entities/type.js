@@ -12,11 +12,11 @@ Type.prototype.toString = function () {
 }
 
 exports.BOOL = Type.BOOL = new Type('bool')
-exports.INT = Type.INT = new Type('int')
+exports.NUM = Type.NUM = new Type('Num')
 exports.forName = function (name) {return cache[name]}
 
 Type.prototype.mustBeInteger = function (message, location) {
-  if (this !== Type.INT) {
+  if (this !== Type.NUM) {
     error(message, location)
   }
 }
