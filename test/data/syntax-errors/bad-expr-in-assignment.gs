@@ -1,2 +1,2 @@
-it x;
-x = whiles + 2;
+it x = 2
+x = 3 + 2

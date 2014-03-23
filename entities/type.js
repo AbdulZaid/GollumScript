@@ -11,9 +11,50 @@ Type.prototype.toString = function () {
   return this.name
 }
 
-exports.BOOL = Type.BOOL = new Type('bool')
+exports.BOOL = Type.BOOL = new Type('Riddle')
 exports.NUM = Type.NUM = new Type('Num')
+exports.RING = Type.RING = new Type('ring')
+exports.FLT = Type.FLT = new Type('Flt')
+exports.STR = Type.STR = new Type('Str')
+exports.CHR = Type.CHR = new Type('Chr')
+exports.ARR = Type.ARR = new Type('Arr')
 exports.forName = function (name) {return cache[name]}
+
+Type.prototype.mustBeInteger = function (message, location) {
+  if (this !== Type.FLT) {
+    error(message, location)
+  }
+}
+
+Type.prototype.mustBeInteger = function (message, location) {
+  if (this !== Type.STR) {
+    error(message, location)
+  }
+}
+
+Type.prototype.mustBeInteger = function (message, location) {
+  if (this !== Type.CHR) {
+    error(message, location)
+  }
+}
+
+Type.prototype.mustBeInteger = function (message, location) {
+  if (this !== Type.ARR) {
+    error(message, location)
+  }
+}
+
+Type.prototype.mustBeInteger = function (message, location) {
+  if (this !== Type.RING) {
+    error(message, location)
+  }
+}
+
+Type.prototype.mustBeInteger = function (message, location) {
+  if (this !== Type.RING) {
+    error(message, location)
+  }
+}
 
 Type.prototype.mustBeInteger = function (message, location) {
   if (this !== Type.NUM) {

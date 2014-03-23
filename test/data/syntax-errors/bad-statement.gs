@@ -1,2 +1,2 @@
-Str a = 7
+Str a = "a"
 givesUs a

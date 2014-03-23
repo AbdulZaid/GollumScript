@@ -4,7 +4,7 @@ function VariableDeclaration(id, type) {
 }
 
 VariableDeclaration.prototype.toString = function () {
-  return '(Var :' + this.id.lexeme + ' ' + this.type + ')'
+  return '(Var : ' + this.id.lexeme + ' ' + this.type + ')'
 }
 
 VariableDeclaration.prototype.analyze = function (context) {

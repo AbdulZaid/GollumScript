@@ -20,6 +20,7 @@ var WhileStatement = require('./entities/whilestatement')
 var IntegerLiteral = require('./entities/integerliteral')
 var StringLiteral = require('./entities/stringliteral')
 var BooleanLiteral = require('./entities/booleanliteral')
+var VariableDeclaration = require ('./entities/variabledeclaration.js')
 var VariableReference = require('./entities/variablereference')
 var BinaryExpression = require('./entities/binaryexpression')
 var UnaryExpression = require('./entities/unaryexpression')
@@ -45,7 +46,7 @@ function parseBlock() {
 
     statements.push(parseStatement())
 
-  } while (at(['it','Riddle','Num','Str','Chr','ifes','ring','makeThing','makeMagic'])) 
+  } while (at(['it','Riddle','Num','Str','Chr','ifes','ring','makeThing','makeMagic','ID','givesUs','printes'])) 
     return new Block(statements)
 }
 
@@ -72,7 +73,7 @@ function parseStatement() {
 
 function parseDeclaration() {
   if (at(['it','Riddle','Num','Str','Chr','ring'])) {
-    parseVarDec()
+    return parseVarDec()
   } else if (at('makeThing')) {
     parseClassDec()
   } else if (at('makeMagic')){
@@ -89,8 +90,9 @@ function parseType() {
 }
 
 function parseVarDec() {
-  parseType()
-  match('ID')
+  var type = parseType()
+  var id = match('ID')
+
   while (at(',')) {
     match(',')
     match('ID')
@@ -100,6 +102,9 @@ function parseVarDec() {
   while (at(',')) {
     parseExp()
   }
+
+  return new VariableDeclaration(id,type)
+
 }
 
 function parseClassDec() {
