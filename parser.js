@@ -13,7 +13,7 @@ var Program = require('./entities/program')//script
 var Block = require('./entities/block')
 var Type = require('./entities/type')
 var VariableDeclaration = require('./entities/variabledeclaration')
-var AssignmentStatement = require('./entities/assignmentstatement')
+var Assignment = require('./entities/assignmentstatement')
 var ReadStatement = require('./entities/readstatement')
 var WriteStatement = require('./entities/writestatement')
 var WhileStatement = require('./entities/whilestatement')
@@ -155,8 +155,12 @@ function parseConditional() {
 
 function parseWhile() {
   match('whiles') 
+  match('(')
   var condition = parseExp()
+  match(')')
   var body = parseBlock()
+
+  match('GollumGollum')
   return new WhileStatement(condition, body)
 }
 
@@ -257,7 +261,7 @@ function parseExp5() {
 
 function parseExp6() {
   if (at(['bless','thief'])) {
-    return new BooleanLiteral.forName(match().lexeme)
+    return new BooleanLiteral(match())
   } else if (at('NumLit')) {
     return new IntegerLiteral(match())
   } else if (at('StrLit')) {

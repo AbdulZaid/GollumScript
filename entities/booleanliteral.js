@@ -2,19 +2,17 @@ var Type = require('./type')
 
 var cache = {}
 
-function BooleanLiteral(name) {
-  this.name = name
-  cache[name] = this
+function BooleanLiteral(token) {
+  this.token = token
 }
 
 BooleanLiteral.prototype.toString = function () {
-  return this.name
+  return this.token.lexeme;
 }
 
 BooleanLiteral.prototype.analyze = function (context) {
   this.type = Type.BOOL
 }
 
-exports.TRUE = new BooleanLiteral('true')
-exports.FALSE = new BooleanLiteral('false')
-exports.forName = function (name) {return cache[name]}
+module.exports = BooleanLiteral
+

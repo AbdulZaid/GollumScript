@@ -4,7 +4,7 @@ function WhileStatement(condition, body) {
 }
 
 WhileStatement.prototype.toString = function () {
-  return '(While ' + this.condition + ' ' + this.body + ')'
+  return '(whiles ' + this.condition + ' ' + this.body + ')'
 }
 
 WhileStatement.prototype.analyze = function (context) {
