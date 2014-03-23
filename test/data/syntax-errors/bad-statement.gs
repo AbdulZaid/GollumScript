@@ -1,4 +1,2 @@
-Num a = p
-printes a
-9 - 2;
-givesUs a;
+Str a = 7
+givesUs a

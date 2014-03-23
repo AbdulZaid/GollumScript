@@ -9,7 +9,7 @@
 var scanner = require('./scanner')
 var error = require('./error')
 
-var Program = require('./entities/program')
+var Program = require('./entities/program')//script
 var Block = require('./entities/block')
 var Type = require('./entities/type')
 var VariableDeclaration = require('./entities/variabledeclaration')
@@ -18,11 +18,14 @@ var ReadStatement = require('./entities/readstatement')
 var WriteStatement = require('./entities/writestatement')
 var WhileStatement = require('./entities/whilestatement')
 var IntegerLiteral = require('./entities/integerliteral')
+var StringLiteral = require('./entities/stringliteral')
 var BooleanLiteral = require('./entities/booleanliteral')
 var VariableReference = require('./entities/variablereference')
 var BinaryExpression = require('./entities/binaryexpression')
 var UnaryExpression = require('./entities/unaryexpression')
 var Return = require('./entities/return')
+var Print = require('./entities/print')
+
 var tokens
 
 module.exports = function (scannerOutput) {
@@ -34,9 +37,6 @@ module.exports = function (scannerOutput) {
 
 function parseScript() {
   return new Program(parseBlock())
-  do {
-    parseStatement()
-  } while (!at('EOF'))
 }
 
 function parseBlock() {
@@ -45,14 +45,13 @@ function parseBlock() {
 
     statements.push(parseStatement())
 
-  } while (at(['Riddle','Num','Str','Chr','<>','[]','ring','makeThing','makeMagic']))
-    match('GollumGollum')
+  } while (at(['it','Riddle','Num','Str','Chr','ifes','ring','makeThing','makeMagic'])) 
     return new Block(statements)
 }
 
 
 function parseStatement() {
-  if (at(['Riddle','Num','Str','Chr','<>','[]','ring','makeThing','makeMagic'])) {
+  if (at(['it','Riddle','Num','Str','Chr','ring','makeThing','makeMagic'])) {
     return parseDeclaration()
   } else if (at('ID')) {
     return parseAssignment()
@@ -72,17 +71,17 @@ function parseStatement() {
 }
 
 function parseDeclaration() {
-  if (at(['Riddle','Num','Str','Chr','<>','[]','ring'])) {
+  if (at(['it','Riddle','Num','Str','Chr','ring'])) {
     parseVarDec()
   } else if (at('makeThing')) {
     parseClassDec()
-  } else {
+  } else if (at('makeMagic')){
     parseFuncDec()
   }
 }
 
 function parseType() {
-  if (at(['Riddle','Num','Str','Chr','<>','[]', 'ring','it'])) {
+  if (at(['Riddle','Num','Str','Chr','ring','it'])) { //Type should be followed by an optional '[]' for arrays
     return Type.forName(match().lexeme)
   } else {
     error('Type expected', tokens[0])
@@ -108,7 +107,7 @@ function parseClassDec() {
   match('ID')
   do {
     parseVarDec()
-  } while (at([9]))
+  } while (!at('GollumGollum'))
 }
 
 function parseFunctDec() {
@@ -116,6 +115,7 @@ function parseFunctDec() {
   match('ID')
   parseParams()
   parseBlock()
+  match('GollumGollum')
 }
 
 function parseParams() {
@@ -144,12 +144,12 @@ function parseConditional() {
   while (at('ifElses')) {
     var condition = parseExpression()
     var body = parseBlock()
-    // Eventually: something like return new Conditional(condition, body)
+    return new Conditional(condition, body)
   }
   if (at('elses')) {
     var condition = null
     var body = parseBlock()
-    // Eventually: something like return new Conditional(condition, body)
+    return new Conditional(condition, body)
   }
 }
 
@@ -160,24 +160,28 @@ function parseWhile() {
   return new WhileStatement(condition, body)
 }
 
-// Chase: Unsure of the syntax diagram equivalent of the For syntax
+
+//Calos: Start  working from here next time
 function parseFor() {
   match('revolves')
+  match('(')
+  while(at('it')){
+    var variables = parseVarDec()
+  }
+  match(';')
+  var condition = parseExp()
+  match(';')
   match('ID')
-  var condition = parseExpression()
+  // Eventually: var incremment = parseIncOp()
+  match(')')
   var body = parseBlock()
+  match('GollumGollum')
   // Eventually: something like return new ForStatement(condition, body)
 }  
  
 function parseReturn() {
   match('givesUs')
-  var variables = []
-  variables.push(new VariableReference(match('ID')))
-  while (at(',')) {
-    match()
-    variables.push(new VariableReference(match('ID')))
-  }
-  return new Return(variables)
+  return new Return(parseExp())
 }
 
 function parsePrint() {
@@ -252,15 +256,17 @@ function parseExp5() {
 }
 
 function parseExp6() {
-  if (at(['true','false'])) {
+  if (at(['bless','thief'])) {
     return new BooleanLiteral.forName(match().lexeme)
   } else if (at('NumLit')) {
     return new IntegerLiteral(match())
+  } else if (at('StrLit')) {
+    return new StringLiteral(match())
   } else if (at('ID')) {
     return new VariableReference(match())
   } else if (at('(')) {
     match()
-    var expression = parseExpression()
+    var expression = parseExp()
     match(')')
     return expression
   } else {
