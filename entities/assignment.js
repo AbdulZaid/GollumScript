@@ -1,16 +1,16 @@
-function AssignmentStatement(target, source) {
+function Assignment(target, source) {
   this.target = target
   this.source = source
 }
 
-AssignmentStatement.prototype.toString = function () {
+Assignment.prototype.toString = function () {
   return '(= ' + this.target + ' ' + this.source + ')'
 }
 
-AssignmentStatement.prototype.analyze = function (context) {
+Assignment.prototype.analyze = function (context) {
   this.target.analyze(context)
   this.source.analyze(context)
   this.source.type.mustBeCompatibleWith(this.target.type, 'Type mismatch in assignment')
 }
 
-module.exports = AssignmentStatement
+module.exports = Assignment

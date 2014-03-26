@@ -9,24 +9,21 @@
 var scanner = require('./scanner')
 var error = require('./error')
 
-var Program = require('./entities/program')//script
+var Program = require('./entities/script')//script
 var Block = require('./entities/block')
 var Type = require('./entities/type')
-var VariableDeclaration = require('./entities/variabledeclaration')
-var Assignment = require('./entities/assignmentstatement')
-var ReadStatement = require('./entities/readstatement')
-var WriteStatement = require('./entities/writestatement')
-var WhileStatement = require('./entities/whilestatement')
+var Assignment = require('./entities/assignment')
+var Whiles = require('./entities/whiles')
 var IntegerLiteral = require('./entities/integerliteral')
 var StringLiteral = require('./entities/stringliteral')
 var BooleanLiteral = require('./entities/booleanliteral')
-var VariableDeclaration = require ('./entities/variabledeclaration.js')
+var VarDec = require ('./entities/vardec')
 var VariableReference = require('./entities/variablereference')
 var BinaryExpression = require('./entities/binaryexpression')
 var UnaryExpression = require('./entities/unaryexpression')
-var Return = require('./entities/return')
-var Print = require('./entities/print')
-
+var GivesUs = require('./entities/givesus')
+var Printes = require('./entities/printes')
+var ClassDec = require('./entities/classdec')
 var tokens
 
 module.exports = function (scannerOutput) {
@@ -63,7 +60,7 @@ function parseStatement() {
   } else if (at('revolves')) {
     return parseFor()
   } else if (at('givesUs')) {
-    return parseReturn()
+    return parseGivesUs()
   } else if (at('printes')) {
     return parsePrint()
   } else {
@@ -103,7 +100,7 @@ function parseVarDec() {
     parseExp()
   }
 
-  return new VariableDeclaration(id,type)
+  return new VarDec(id,type)
 
 }
 
@@ -166,7 +163,7 @@ function parseWhile() {
   var body = parseBlock()
 
   match('GollumGollum')
-  return new WhileStatement(condition, body)
+  return new Whiles(condition, body)
 }
 
 
@@ -188,9 +185,9 @@ function parseFor() {
   // Eventually: something like return new ForStatement(condition, body)
 }  
  
-function parseReturn() {
+function parseGivesUs() {
   match('givesUs')
-  return new Return(parseExp())
+  return new GivesUs(parseExp())
 }
 
 function parsePrint() {
@@ -201,7 +198,7 @@ function parsePrint() {
     match()
     expressions.push(parseExp())
   }
-  return new Print(expressions)
+  return new Printes(expressions)
 }
 
 function parseExp() {
