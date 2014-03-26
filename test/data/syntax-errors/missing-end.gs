@@ -1,2 +1,3 @@
-whiles bless 
-	givesUs 1;
+whiles (bless) 
+	givesUs 1
+GollumGollum

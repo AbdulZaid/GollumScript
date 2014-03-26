@@ -1,2 +1,2 @@
-it x
-it y;
+it x = "f"
+it y = "hey"

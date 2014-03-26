@@ -1,1 +1,1 @@
-givesUs 1 < 2 < 3;
+givesUs ((1 < 2) || bless) 

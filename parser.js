@@ -206,7 +206,7 @@ function parsePrint() {
 
 function parseExp() {
   var left = parseExp1()
-  while (at('or')) {
+  while (at('||')) {
     var op = match()
     var right = parseExp1()
     left = new BinaryExpression(op, left, right)
@@ -216,7 +216,7 @@ function parseExp() {
 
 function parseExp1() {
   var left = parseExp2()
-  while (at('and')) {
+  while (at('&&')) {
     var op = match()
     var right = parseExp2()
     left = new BinaryExpression(op, left, right)
