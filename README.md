@@ -83,7 +83,7 @@ The Gollum language is designed by implementing the famous character “Gollum" 
        
 **CLASSES**
 
-       make Thing ring
+       makeThing ring
            Num diameter = 10 
            Num height = 0.2
            Num width = 0.1
