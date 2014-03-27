@@ -43,7 +43,7 @@ function parseBlock() {
 
     statements.push(parseStatement())
 
-  } while (at(['it','Riddle','Num','Str','Chr','ifes','ring','makeThing','makeMagic','ID','givesUs','printes'])) 
+  } while (at(['it','Riddle','Num','Str','Chr','ifes','makeThing','makeMagic','ID','givesUs','printes'])) 
     return new Block(statements)
 }
 
@@ -69,7 +69,7 @@ function parseStatement() {
 }
 
 function parseDeclaration() {
-  if (at(['it','Riddle','Num','Str','Chr','ring'])) {
+  if (at(['it','Riddle','Num','Str','Chr'])) {
     return parseVarDec()
   } else if (at('makeThing')) {
     parseClassDec()
@@ -79,7 +79,7 @@ function parseDeclaration() {
 }
 
 function parseType() {
-  if (at(['Riddle','Num','Str','Chr','ring','it'])) { //Type should be followed by an optional '[]' for arrays
+  if (at(['Riddle','Num','Str','Chr','it'])) { //Type should be followed by an optional '[]' for arrays
     return Type.forName(match().lexeme)
   } else {
     error('Type expected', tokens[0])
