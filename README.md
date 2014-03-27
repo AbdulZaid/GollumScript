@@ -163,8 +163,8 @@ Numbers in Gollum can be denoted as octal, hexadecimal, or decimal. Octal number
       Params        ::= '(' Type Id (',' Type Id)* ')'
       IncOp         ::= '++' | '--'
       
-      Exp           ::= Exp1 ('or' Exp1)*
-      Exp1          ::= Exp2 ('and' Exp2)*
+      Exp           ::= Exp1 ('||' Exp1)*
+      Exp1          ::= Exp2 ('&&' Exp2)*
       Exp2          ::= Exp3 (('<' | '<=' | '==' | '!=' | '>=' | '>') Exp3)?
       Exp3          ::= Exp4 ([+-] Exp4)*
       EXP4          ::= Exp5 ([*/%] Exp5)*
