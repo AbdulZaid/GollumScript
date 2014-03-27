@@ -47,7 +47,7 @@ The Gollum language is designed by implementing the famous character “Gollum" 
 
 **FUNCTIONS**
 
-        magic it bmi(it pounds, it inches)                  var bmi = function (pounds, inches) {
+        makeMagic bmi(it pounds, it inches)                 var bmi = function (pounds, inches) {
             forever it KILOGRAM_PER_POUND = 0.45359237          var KILOGRAMS_PER_POUND = 0.45359237;
             forever it METERS_PER_INCH = 0.0254                 var METERS_PER_INCH = 0.0254;
             it kilos = pounds * KILOGRAM_PER_POUND              var kilos = pounds * KILOGRAMS_PER_POUND;
@@ -55,7 +55,7 @@ The Gollum language is designed by implementing the famous character “Gollum" 
             givesUs kilos / (meters * meters)                   return kilos / (meters * meters)
         GollumGollum                                        }
                                             	    
-        magic it gcd(x, y)                                  var gcd = function (x, y) {
+        makeMagic gcd(x, y)                                 var gcd = function (x, y) {
             givesUs x % y == 0 ? x : gcd(y, x % y)              return x%y == 0 ? x : gcd(y, x%y); 
         GollumGollum                                        }       
     
@@ -64,8 +64,8 @@ The Gollum language is designed by implementing the famous character “Gollum" 
         ifes                               if 
         elses                              else 
         ifElses                            else if 
-        make Magic                         define function
-        make Thing                         define class
+        makeMagic                          define function
+        makeThing                          define class
         revolve Til                        loop until
         revolves                           for loop
         whiles                             while loop
@@ -83,7 +83,7 @@ The Gollum language is designed by implementing the famous character “Gollum" 
        
 **CLASSES**
 
-       makeThing ring
+       makeThing sword
            Num diameter = 10 
            Num height = 0.2
            Num width = 0.1
@@ -92,8 +92,9 @@ The Gollum language is designed by implementing the famous character “Gollum" 
        
 Class names automatically become constructor functions, taking as arguments the fields in the order that they were declared:
 
-      ring theOne = ring(11, 0.3, 0.1, bless)
-      ring theSecond = ring(13, 0.3, 0.11, thief)
+      sword theOne = sword(11, 0.3, 0.1, bless)
+      sword theSecond = sword(13, 0.3, 0.11, thief)
+      
 
 **NUMBERS AND THEIR TYPES**
 Numbers in Gollum can be denoted as octal, hexadecimal, or decimal. Octal numbers are prefixed with a 0 and hexadecimal numbers are prefixed with a 0x. Decimal numbers have no prefix.
@@ -155,7 +156,7 @@ Numbers in Gollum can be denoted as octal, hexadecimal, or decimal. Octal number
 
 
       Declaration   ::= VarDec | ClassDec | FuncDec    
-      Type          ::= ('Riddle' | 'Num' | 'Flt' | 'Str' | 'Chr' | 'ring') ('['']')? 
+      Type          ::= ('Riddle' | 'Num' | 'Flt' | 'Str' | 'Chr' ) ('['']')? 
       VarDec        ::= ('it' | Type) Assignment  (','  Assignment)*
       Assignment    ::= Id '=' Exp
       ClassDec      ::= 'makeThing' Id VarDec+ 'GollumGollum'
@@ -184,7 +185,7 @@ Numbers in Gollum can be denoted as octal, hexadecimal, or decimal. Octal number
 **SAMPLE PROGRAMS**
 
       ~~ A Body Mass Index function
-      magic it bmi(it pounds, it inches) 
+      makeMagic bmi (it pounds, it inches) 
           forever it KILOGRAM_PER_POUND = 0.45359237
           forever it METERS_PER_INCH = 0.0254
           it kilos = pounds * KILOGRAM_PER_POUND
@@ -196,7 +197,7 @@ Numbers in Gollum can be denoted as octal, hexadecimal, or decimal. Octal number
       
       
       ~~ Returns the largest element in an array.
-      magic it max (a) 
+      makeMagic max (a) 
           it largest = a[0]
           revolves (it i = 1; i <  a.thingsInIt; i ++) 
               ifes (a[i] > largest) 
