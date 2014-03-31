@@ -1,3 +1,5 @@
+//This is a direct copy of Iki's analyzer. Look if there's anything needs to be done later on.
+
 var error = require('./error')
 
 function AnalysisContext(parent) {
