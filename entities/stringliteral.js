@@ -12,4 +12,8 @@ StringLiteral.prototype.analyze = function (context) {
   this.type = Type.StrLit
 }
 
+StringLiteral.prototype.optimize = function () {
+  return this
+}
+
 module.exports = StringLiteral

@@ -1,5 +1,3 @@
-module.exports = WriteStatement
-
 function WriteStatement(expressions) {
   this.expressions = expressions
 }
