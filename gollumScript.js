@@ -29,11 +29,11 @@ scan(argv._[0], function (tokens) {
     console.log(program.toString())
     return
   }
+  program.analyze()
+  if (error.count > 0) return
   if (argv.o) {
     program = program.optimize()
   }
-  program.analyze()
-  if (error.count > 0) return
   if (argv.i) {
     program.showSemanticGraph()
     return
