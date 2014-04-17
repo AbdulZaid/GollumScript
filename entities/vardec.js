@@ -1,15 +1,19 @@
-function VarDec(id, type) {
+var Type = require('./type')
+
+function VariableDeclaration(id, type) {
   this.id = id
   this.type = type
 }
 
-VarDec.prototype.toString = function () {
-  return '(VarDec : ' + this.id.lexeme + ' ' + this.type + ')'
+VariableDeclaration.prototype.toString = function () {
+  return '(Var :' + this.id.lexeme + ' ' + this.type + ')'
 }
 
-VarDec.prototype.analyze = function (context) {
+VariableDeclaration.prototype.analyze = function (context) {
   context.variableMustNotBeAlreadyDeclared(this.id)
   context.addVariable(this.id.lexeme, this)
 }
 
-module.exports = VarDec
+VariableDeclaration.ARBITRARY = new VariableDeclaration('<arbitrary>', Type.ARBITRARY)
+
+module.exports = VariableDeclaration
