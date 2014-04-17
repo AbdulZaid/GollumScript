@@ -1,6 +1,5 @@
-//This is a direct copy of Iki's analyzer. Look if there's anything needs to be done later on.
-
 var error = require('./error')
+var VariableDeclaration = require('./entities/VariableDeclaration')
 
 function AnalysisContext(parent) {
   this.parent = parent
@@ -31,6 +30,7 @@ AnalysisContext.prototype.lookupVariable = function (token) {
     return variable
   } else if (!this.parent) {
     error('Variable ' + token.lexeme + ' not found', token)
+    return VariableDeclaration.ARBITRARY
   } else {
     return this.parent.lookupVariable(token)
   }
