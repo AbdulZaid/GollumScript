@@ -92,12 +92,14 @@ function parseVarDec() {
 
   while (at(',')) {
     match(',')
-    match('ID')
+    parseVarDec()
   }
-  match('=')
-  parseExp()
-  while (at(',')) {
+  if (at('=')) {
+    match('=')
     parseExp()
+    while (at(',')) {
+      parseExp()
+    }
   }
 
   return new VarDec(id,type)
@@ -112,7 +114,7 @@ function parseClassDec() {
   } while (!at('GollumGollum'))
 }
 
-function parseFunctDec() {
+function parseFuncDec() {
   match('makeMagic')
   match('ID')
   parseParams()
@@ -125,6 +127,7 @@ function parseParams() {
   parseType()
   match('ID')
   while (at(',')) {
+    match(',')
     parseType()
     match('ID')
   }
