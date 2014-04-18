@@ -8,5 +8,5 @@ magic it bmi(it pounds, it inches){
     givesUs kilos / (meters * meters)
 GollumGollum
 
-printes bmi(120,66)
+printes bmi (120,66)
 
