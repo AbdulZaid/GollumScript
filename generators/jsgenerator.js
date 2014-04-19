@@ -9,16 +9,16 @@ var indentPadding = 4
 var indentLevel = 0
 
 function emit(line) {
-  var pad = indentPadding * indentLevel;
+  var pad = indentPadding * indentLevel
   console.log(Array(pad+1).join(' ') + line)
 }
 
 function makeOp(op) {
-  return {not: '!', and: '&&', or: '||'}[op] || op
+  return {not: '!', and: '&&', or: '||', '==': '===', '!=': '!=='}[op] || op
 }
 
 var makeVariable = (function () {
-  var lastId = 0;
+  var lastId = 0
   var map = new HashMap()
   return function (v) {
     if (!map.has(v)) map.set(v, ++lastId)
@@ -32,7 +32,7 @@ function gen(e) {
 
 var generator = {
 
-  'Program': function (program) {
+  'Script': function (program) {
     indentLevel = 0
     emit('(function () {')
     gen(program.block)
@@ -47,31 +47,31 @@ var generator = {
     indentLevel--
   },
 
-  'VariableDeclaration': function (v) {
-    var initializer = {'int': '0', 'bool': 'false'}[v.type];
+  'VarDec': function (v) {
+    var initializer = {'int': '0', 'bool': 'false'}[v.type]
     emit(util.format('var %s = %s;', makeVariable(v), initializer))
   },
 
-  'AssignmentStatement': function (s) {
+  'Assignment': function (s) {
     emit(util.format('%s = %s;', gen(s.target), gen(s.source)))
   },
 
-  'ReadStatement': function (s) {
+  'Printes': function (s) {
     s.varrefs.forEach(function (v) {
       emit(util.format('%s = prompt();', makeVariable(v.referent)))
     })
   },
 
-  'WriteStatement': function (s) {
+  'givesUs': function (s) {
     s.expressions.forEach(function (e) {
       emit(util.format('alert(%s);', gen(e)))
     })
   },
 
-  'WhileStatement': function (s) {
+  'Whiles': function (s) {
     emit('while (' + gen(s.condition) + ') {')
-    gen(s.body);
-    emit('}');
+    gen(s.body)
+    emit('}')
   },
 
   'IntegerLiteral': function (literal) {
