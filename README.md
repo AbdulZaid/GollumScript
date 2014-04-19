@@ -173,7 +173,7 @@ Numbers in Gollum can be denoted as octal, hexadecimal, or decimal. Octal number
       EXP6          ::=  'bless' | 'thief' | NumLit | StrLit | '(' Exp ')' | ArrayExp |
                          Id '(' Exp (',' Exp )* 
       
-      ArrayExp      ::= '[' (EXP (',' EXP)*)? ']'
+      ArrayExp      ::= '[' Exp | (Exp ',')+ Exp | '' ']'
 
       
       

@@ -24,7 +24,7 @@ var UnaryExpression = require('./entities/unaryexpression')
 var GivesUs = require('./entities/givesus')
 var Printes = require('./entities/printes')
 var ClassDec = require('./entities/classdec')
-var FuncDec = require('./entities/FuncDec')
+var FuncDec = require('./entities/funcdec')
 var tokens
 
 module.exports = function (scannerOutput) {
