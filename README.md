@@ -105,11 +105,11 @@ Numbers in Gollum can be denoted as octal, hexadecimal, or decimal. Octal number
       
 **ARRAYS**
 
-      Num[] p = [100, 43, 22, 5, 8]        var p = [100, 43, 22, 5, 8];
+      it p = [100, 43, 22, 5, 8]           var p = [100, 43, 22, 5, 8];
       it n = 78                            var n = 78;
       p.sneakIn(n)                         p.push(n);
       printes(p[p.thingsInIt -1]           console.log(p[p.length-1]);
-      it q =p                              var q = p;
+      it q = p                             var q = p;
       it a = [88, false, “0001”, green]    var a = [88, false, “0001”, green]; 
 
 **LOOPS**
@@ -170,8 +170,10 @@ Numbers in Gollum can be denoted as octal, hexadecimal, or decimal. Octal number
       Exp3          ::= Exp4 ([+-] Exp4)*
       EXP4          ::= Exp5 ([*/%] Exp5)*
       EXP5          ::= ('-' | 'not')? Exp6
-      EXP6          ::=  'bless' | 'thief' | NumLit | StrLit | '(' Exp ')' | '[' Exp (',' Exp )* ']' |
+      EXP6          ::=  'bless' | 'thief' | NumLit | StrLit | '(' Exp ')' | ArrayExp |
                          Id '(' Exp (',' Exp )* 
+      
+      ArrayExp      ::= '[' (EXP (',' EXP)*)? ']'
 
       
       
