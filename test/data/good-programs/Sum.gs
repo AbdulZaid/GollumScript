@@ -1,9 +1,8 @@
 ~~ A sum function
 
 makeMagic sum(a) 
-    it result = 0
-    revolves (it i = 0; i < a.thingsInIt; i++ ) 
-        result += a[i]
-    GollumGollum
+    it valueOne = 0
+    it valueTwo = a
+  	it result = valueOne + valueTwo
     givesUs result
 GollumGollum

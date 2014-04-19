@@ -1,5 +1,5 @@
 var error = require('./error')
-var VariableDeclaration = require('./entities/VarDec')
+var VariableDeclaration = require('./entities/vardec')
 
 function AnalysisContext(parent) {
   this.parent = parent

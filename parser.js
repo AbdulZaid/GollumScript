@@ -102,9 +102,7 @@ function parseVarDec() {
       parseExp()
     }
   }
-
   return new VarDec(id,type)
-
 }
 
 function parseClassDec() {
@@ -116,11 +114,12 @@ function parseClassDec() {
 }
 
 function parseFuncDec() {
-  match('makeMagic')
+  var funtype = match()
   match('ID')
-  parseParams()
-  parseBlock()
+  var params = parseParams()
+  var body = parseBlock()
   match('GollumGollum')
+  return new FuncDec(funtype, params, body)
 }
 
 function parseParams() {
