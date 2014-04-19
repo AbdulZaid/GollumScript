@@ -24,6 +24,7 @@ var UnaryExpression = require('./entities/unaryexpression')
 var GivesUs = require('./entities/givesus')
 var Printes = require('./entities/printes')
 var ClassDec = require('./entities/classdec')
+var FuncDec = require('./entities/FuncDec')
 var tokens
 
 module.exports = function (scannerOutput) {
@@ -124,11 +125,11 @@ function parseFuncDec() {
 
 function parseParams() {
   match('(')
-  parseType()
+  //parseType()
   match('ID')
   while (at(',')) {
     match(',')
-    parseType()
+    //parseType()
     match('ID')
   }
   match(')')

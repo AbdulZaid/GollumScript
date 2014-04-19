@@ -47,12 +47,12 @@ The Gollum language is designed by implementing the famous character “Gollum" 
 
 **FUNCTIONS**
 
-        makeMagic bmi(it pounds, it inches)                 var bmi = function (pounds, inches) {
-            forever it KILOGRAM_PER_POUND = 0.45359237          var KILOGRAMS_PER_POUND = 0.45359237;
-            forever it METERS_PER_INCH = 0.0254                 var METERS_PER_INCH = 0.0254;
+        makeMagic bmi(pounds, inches)                       var bmi = function (pounds, inches) {
+            it KILOGRAM_PER_POUND = 0.45359237                  var KILOGRAMS_PER_POUND = 0.45359237;
+            it METERS_PER_INCH = 0.0254                         var METERS_PER_INCH = 0.0254;
             it kilos = pounds * KILOGRAM_PER_POUND              var kilos = pounds * KILOGRAMS_PER_POUND;
             it inches = inches * METERS_PER_INCH                var inches = inches * METERS_PER_INCH;
-            givesUs kilos / (meters * meters)                   return kilos / (meters * meters)
+            givesUs (kilos / (meters * meters))                 return kilos / (meters * meters)
         GollumGollum                                        }
                                             	    
         makeMagic gcd(x, y)                                 var gcd = function (x, y) {
@@ -185,12 +185,12 @@ Numbers in Gollum can be denoted as octal, hexadecimal, or decimal. Octal number
 **SAMPLE PROGRAMS**
 
       ~~ A Body Mass Index function
-      makeMagic bmi (it pounds, it inches) 
-          forever it KILOGRAM_PER_POUND = 0.45359237
-          forever it METERS_PER_INCH = 0.0254
+      makeMagic bmi (pounds, inches) 
+          it KILOGRAM_PER_POUND = 0.45359237
+          it METERS_PER_INCH = 0.0254
           it kilos = pounds * KILOGRAM_PER_POUND
           it inches = inches * METERS_PER_INCH
-          givesUs kilos / (meters * meters)
+          givesUs (kilos / (meters * meters))
       GollumGollum
       printes bmi (120,66)
       
