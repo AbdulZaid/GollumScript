@@ -195,13 +195,8 @@ function parseGivesUs() {
 
 function parsePrint() {
   match('printes')
-  var expressions = []
-  expressions.push(parseExp())
-  while (at(',')) {
-    match()
-    expressions.push(parseExp())
-  }
-  return new Printes(expressions)
+  var expression = parseExp()
+  return new Printes(expression)
 }
 
 function parseExp() {
@@ -268,9 +263,9 @@ function parseExp6() {
   if (at(['bless','thief'])) {
     return new BooleanLiteral(match())
   } else if (at('NumLit')) {
-    return new IntegerLiteral(match())
+    return new IntegerLiteral(match().lexeme)
   } else if (at('StrLit')) {
-    return new StringLiteral(match())
+    return new StringLiteral(match().lexeme)
   } else if (at('ID')) {
     return new VariableReference(match())
   } else if (at('(')) {

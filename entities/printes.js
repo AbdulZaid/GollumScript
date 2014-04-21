@@ -1,20 +1,17 @@
-function Printes(expressions) {
-  this.expressions = expressions
+function Printes(expression) {
+  this.expression = expression
 }
 
 Printes.prototype.toString = function () {
-  return '(printes ' + this.expressions.join(' ') + ')'
+  return '(printes ' + this.expression + ')'
 }
 
 Printes.prototype.analyze = function (context) {
-  this.expressions.forEach(function (e) {
-    e.analyze(context)
-    e.type.mustBeInteger('Expressions in "printes" statement must have type integer')
-  })
+  this.expression.analyze(context)
 }
 
 Printes.prototype.optimize = function () {
-  this.expressions = this.expressions.map(function (e) {return e.optimize()})
+  this.expression = this.expression.optimize()
   return this
 }
 
