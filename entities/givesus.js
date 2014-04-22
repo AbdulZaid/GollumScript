@@ -1,16 +1,13 @@
-function givesUs(expressions) {
-  this.expressions = expressions
+function givesUs(expression) {
+  this.expression = expression
 }
 
 givesUs.prototype.toString = function () {
-  return '(givesUs ' + this.expressions.toString() + ')'
+  return '(givesUs ' + this.expression + ')'
 }
 
 givesUs.prototype.analyze = function (context) {
-  this.expressions.forEach(function (e) {
-    e.analyze(context)
-    e.type.mustBeInteger('Expressions in "givesUs" statement must have type integer')
-  })
+  e.analyze(context)
 }
 
 givesUs.prototype.optimize = function () {

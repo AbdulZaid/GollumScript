@@ -56,16 +56,12 @@ var generator = {
     emit(util.format('%s = %s;', gen(s.target), gen(s.source)))
   },
 
-  'Printes': function (s) {
-    s.varrefs.forEach(function (v) {
-      emit(util.format('%s = prompt();', makeVariable(v.referent)))
-    })
+  'Printes': function (e) {
+    emit(util.format('alert(%s);', gen(e.expression)))
   },
 
   'givesUs': function (s) {
-    s.expressions.forEach(function (e) {
-      emit(util.format('alert(%s);', gen(e)))
-    })
+    emit(util.format('return %s;', gen(e.expression)))
   },
 
   'Whiles': function (s) {
