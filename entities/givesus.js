@@ -3,7 +3,7 @@ function givesUs(expressions) {
 }
 
 givesUs.prototype.toString = function () {
-  return '(givesUs ' + this.expressions.join(' ') + ')'
+  return '(givesUs ' + this.expressions.toString() + ')'
 }
 
 givesUs.prototype.analyze = function (context) {

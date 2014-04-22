@@ -17,6 +17,7 @@ var Whiles = require('./entities/whiles')
 var IntegerLiteral = require('./entities/integerliteral')
 var StringLiteral = require('./entities/stringliteral')
 var BooleanLiteral = require('./entities/booleanliteral')
+var ArrayLiteral = require('./entities/arrayliteral')
 var VarDec = require ('./entities/vardec')
 var VariableReference = require('./entities/variablereference')
 var BinaryExpression = require('./entities/binaryexpression')
@@ -73,9 +74,9 @@ function parseDeclaration() {
   if (at(['it','Riddle','Num','Str','Chr'])) {
     return parseVarDec()
   } else if (at('makeThing')) {
-    parseClassDec()
+    return parseClassDec()
   } else if (at('makeMagic')){
-    parseFuncDec()
+    return parseFuncDec()
   }
 }
 
@@ -92,14 +93,18 @@ function parseVarDec() {
   var id = match('ID')
 
   while (at(',')) {
-    match(',')
+  match(',')
     parseVarDec()
   }
   if (at('=')) {
     match('=')
-    parseExp()
-    while (at(',')) {
+    if (at('[')) {
+    return parseArrayLit()
+    } else {
       parseExp()
+      while (at(',')) {
+        parseExp()
+      }
     }
   }
   return new VarDec(id,type)
@@ -132,6 +137,20 @@ function parseParams() {
     match('ID')
   }
   match(')')
+}
+
+function parseArrayLit() {
+  var elements = []
+  match('[')
+  if (!at(']')) {
+    elements.push(parseExp6())
+  }
+  while (at(',')) {
+    match()
+    elements.push(parseExp6())
+  }
+  match(']')
+  return new ArrayLiteral(elements)
 }
 
 function parseAssignment() {
@@ -268,6 +287,8 @@ function parseExp6() {
     return new StringLiteral(match().lexeme)
   } else if (at('ID')) {
     return new VariableReference(match())
+  } else if (at('[')) {
+    return parseArrayLit()
   } else if (at('(')) {
     match()
     var expression = parseExp()
