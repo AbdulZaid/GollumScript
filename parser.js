@@ -26,6 +26,7 @@ var GivesUs = require('./entities/givesus')
 var Printes = require('./entities/printes')
 var ClassDec = require('./entities/classdec')
 var FuncDec = require('./entities/funcdec')
+var Paramenters = require('./entities/parameters')
 var tokens
 
 module.exports = function (scannerOutput) {
@@ -121,22 +122,24 @@ function parseClassDec() {
 function parseFuncDec() {
   var funtype = match()
   match('ID')
-  var params = parseParams()
+  var params = parseParamenters()
   var body = parseBlock()
   match('GollumGollum')
   return new FuncDec(funtype, params, body)
 }
 
-function parseParams() {
+function parseParamenters() {
   match('(')
-  //parseType()
-  match('ID')
+  var parameters = []
+  if (at('ID')) {
+    parameters.push(match('ID'))
+  }
   while (at(',')) {
-    match(',')
-    //parseType()
-    match('ID')
+    match()
+    parameters.push(match('ID'))
   }
   match(')')
+  return new Paramenters(parameters)
 }
 
 function parseArrayLit() {
@@ -284,8 +287,8 @@ function parseExp6() {
   } else if (at('NumLit')) {
     return new IntegerLiteral(match().lexeme)
   } else if (at('StrLit')) {
-    return new StringLiteral(match().lexeme)
-  } else if (at('thief')) {
+    return new StringLiteral(match())
+  } else if (at('thief')||at('bless')) {
     return new BooleanLiteral(match())
   } else if (at('ID')) {
     return new VariableReference(match())
