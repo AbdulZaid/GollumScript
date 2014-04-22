@@ -27,6 +27,12 @@ var Printes = require('./entities/printes')
 var ClassDec = require('./entities/classdec')
 var FuncDec = require('./entities/funcdec')
 var Paramenters = require('./entities/parameters')
+var DottedVar = require('./entities/dottedvar')
+var BasicVar = require('./entities/basicvar')
+var Revolves = require('./entities/revolves')
+var IncOp = require('./entities/incop')
+var Ifes = require('./entities/ifes')
+
 var tokens
 
 module.exports = function (scannerOutput) {
@@ -46,7 +52,7 @@ function parseBlock() {
 
     statements.push(parseStatement())
 
-  } while (at(['it','Riddle','Num','Str','Chr','ifes','makeThing','makeMagic','ID','givesUs','printes'])) 
+  } while (at(['it','Riddle','Num','Str','Chr','ifes','makeThing','makeMagic','ID','givesUs','printes','revolves'])) 
     return new Block(statements)
 }
 
@@ -54,10 +60,12 @@ function parseBlock() {
 function parseStatement() {
   if (at(['it','Riddle','Num','Str','Chr','ring','makeThing','makeMagic'])) {
     return parseDeclaration()
+  }  else if (at(['++','--'])) {
+    return parseIncOp()
   } else if (at('ID')) {
     return parseAssignment()
   } else if (at('ifes')) {
-    return parseConditional()
+    return parseIfes()
   } else if (at('whiles')) {
     return parseWhile()
   } else if (at('revolves')) {
@@ -98,13 +106,14 @@ function parseVarDec() {
   var id = match('ID')
   var value
   while (at(',')) {
-  match(',')
+    match(',')
     parseVarDec()
   }
+
   if (at('=')) {
     match('=')
     if (at('[')) {
-    return parseArrayLit()
+      return parseArrayLit()
     } else {
       value = parseExp()
       while (at(',')) {
@@ -160,6 +169,30 @@ function parseArrayLit() {
   return new ArrayLiteral(elements)
 }
 
+function parseVar() {
+  function gather (base) {
+    if (at('.')) {
+      return parseDottedVar(base)
+    }
+  }
+
+  var result = parseBasicVar()
+  while (at(['.'])) {
+    result = gather(result)
+  }
+  return result
+}
+
+function parseBasicVar () {
+  return new BasicVar(match('ID').lexeme)
+}
+
+function parseDottedVar (struct) {
+  match('.')
+  return new DottedVar(struct.name, match('ID').lexeme)
+}
+
+
 function parseAssignment() {
   var target = new VariableReference(match('ID'))
   match('=')
@@ -167,20 +200,20 @@ function parseAssignment() {
   return new Assignment(target, source)
 }
 
-function parseConditional() {
+function parseIfes() {
   match('ifes')
-  var condition = parseExpression()
+  var condition = parseExp()
   var body = parseBlock()
-  return new Conditional(condition, body)
+  return new Ifes(condition, body)
   while (at('ifElses')) {
-    var condition = parseExpression()
+    var condition = parseExp()
     var body = parseBlock()
-    return new Conditional(condition, body)
+    return new Ifes(condition, body)
   }
   if (at('elses')) {
     var condition = null
     var body = parseBlock()
-    return new Conditional(condition, body)
+    return new Ifes(condition, body)
   }
 }
 
@@ -196,24 +229,40 @@ function parseWhile() {
 }
 
 
-//Calos: Start  working from here next time
+//Abdul: Start  working from here next time
 function parseFor() {
-  match('revolves')
+  match('revolves') 
   match('(')
+  var assignments = []
   while(at('it')){
-    var variables = parseVarDec()
+    assignments.push(parseVarDec())
   }
   match(';')
   var condition = parseExp()
   match(';')
+  var after = []
   match('ID')
-  // Eventually: var incremment = parseIncOp()
+  after.push(parseIncOp())
   match(')')
   var body = parseBlock()
   match('GollumGollum')
-  // Eventually: something like return new ForStatement(condition, body)
-}  
- 
+  return new Revolves(assignments, condition, after, body)
+}
+
+function parseIncOp() {
+  var positive
+  var target // work on the target and use it inside the intity.
+  if (at('++')) {
+    positive = true;
+    match('++')
+    // target = parseVar()
+  } else if (at('--')) {
+    // target = parseVar()
+    match('--')
+  }
+  return new IncOp( (positive ? "++" : "--") )
+}
+
 function parseGivesUs() {
   match('givesUs')
   return new GivesUs(parseExp())
@@ -292,10 +341,10 @@ function parseExp6() {
     return new IntegerLiteral(match().lexeme)
   } else if (at('StrLit')) {
     return new StringLiteral(match())
-  } else if (at('thief')||at('bless')) {
+  } else if (at('thief')|| at('bless')) {
     return new BooleanLiteral(match())
   } else if (at('ID')) {
-    return new VariableReference(match())
+    return new parseVar()
   } else if (at('[')) {
     return parseArrayLit()
   } else if (at('(')) {

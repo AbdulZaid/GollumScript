@@ -1,15 +1,18 @@
-function Revolves(condition, body) {
+function Revolves(declaration, condition, assignment, body) {
+  this.declaration = declaration
   this.condition = condition
-  this.body = body
+  this.assignment = assignment
+  this.body = body 
 }
 
-ForStatement.prototype.toString = function () {
-  return '(Revolves ' + this.condition + ' ' + this.body + ')'
+Revolves.prototype.toString = function () {
+  return '(Revolves ' + this.declaration +  this.condition + this.assignment + ' ' + this.body + ')'
 }
 
-WhileStatement.prototype.analyze = function (context) {
+Revolves.prototype.analyze = function (context) {
+  this.declaration.analyze(context)
   this.condition.analyze(context)
-  this.condition.type.mustBeBoolean('Condition in "revolves" statement must be boolean')
+  this.assignment.analyze(context)
   this.body.analyze(context)
 }
 
