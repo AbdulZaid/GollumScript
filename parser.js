@@ -122,10 +122,10 @@ function parseClassDec() {
 function parseFuncDec() {
   var funtype = match()
   match('ID')
-  var params = parseParamenters()
+  var parameters = parseParamenters()
   var body = parseBlock()
   match('GollumGollum')
-  return new FuncDec(funtype, params, body)
+  return new FuncDec(funtype, parameters, body)
 }
 
 function parseParamenters() {
