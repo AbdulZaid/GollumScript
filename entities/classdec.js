@@ -5,11 +5,11 @@ function ClassDec(properties) {
 }
 
 ClassDec.prototype.toString = function () {
-  return '( ClassDec ' + this.properties.join(', ') + ')'
+  return '( ClassDec ' + this.properties.toString() + ')'
 }
 
 ClassDec.prototype.analyze = function (context) {
-  this.type = Type.OBJLIT
+  this.properties.analyze(context)
 }
 
 module.exports = ClassDec

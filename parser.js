@@ -127,9 +127,9 @@ function parseVarDec() {
 function parseClassDec() {
   match('makeThing')
   match('ID')
-  do {
-    parseVarDec()
-  } while (!at('GollumGollum'))
+  var body = parseBlock()
+  match("GollumGollum")
+  return new ClassDec(body)
 }
 
 function parseFuncDec() {
@@ -145,11 +145,11 @@ function parseParamenters() {
   match('(')
   var parameters = []
   if (at('ID')) {
-    parameters.push(match('ID'))
+    parameters.push(match('ID').lexeme)
   }
   while (at(',')) {
     match()
-    parameters.push(match('ID'))
+    parameters.push(match('ID').lexeme)
   }
   match(')')
   return new Paramenters(parameters)
@@ -204,17 +204,27 @@ function parseIfes() {
   match('ifes')
   var condition = parseExp()
   var body = parseBlock()
-  return new Ifes(condition, body)
+  match('GollumGollum')
+
   while (at('ifElses')) {
+    match('ifElses')
     var condition = parseExp()
     var body = parseBlock()
+    match('GollumGollum')
     return new Ifes(condition, body)
   }
   if (at('elses')) {
-    var condition = null
-    var body = parseBlock()
-    return new Ifes(condition, body)
+    parseElses()
   }
+  return new Ifes(condition, body)
+}
+//edit this and add it back to parseIfes()
+function parseElses() {
+  match('elses')
+  var condition = parseExp() //should not take a condition. this must deleted.
+  var body = parseBlock()
+  match('GollumGollum')
+  return new Ifes(condition, body)
 }
 
 function parseWhile() {
@@ -264,8 +274,14 @@ function parseIncOp() {
 }
 
 function parseGivesUs() {
+  var result = []
   match('givesUs')
-  return new GivesUs(parseExp())
+  result.push(parseExp())
+  if (at(',')) {
+    match()
+    result.push(parseExp())
+  }
+  return new GivesUs(result)
 }
 
 function parsePrint() {
@@ -316,7 +332,7 @@ function parseExp3() {
 
 function parseExp4() {
   var left = parseExp5()
-  while (at(['*','/'])) {
+  while (at(['*','/','%'])) {
     op = match()
     right = parseExp5()
     left = new BinaryExpression(op, left, right)
@@ -325,7 +341,7 @@ function parseExp4() {
 }
 
 function parseExp5() {
-  if (at(['-','not'])) {
+  if (at(['-','!'])) {
     op = match()
     operand = parseExp6()
     return new UnaryExpression(op, operand)
