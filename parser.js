@@ -9,7 +9,7 @@
 var scanner = require('./scanner')
 var error = require('./error')
 
-var Program = require('./entities/script')//script
+var Program = require('./entities/script')
 var Block = require('./entities/block')
 var Type = require('./entities/type')
 var Assignment = require('./entities/assignment')
@@ -81,18 +81,22 @@ function parseDeclaration() {
   }
 }
 
-function parseType() {
-  if (at(['Riddle','Num','Str','Chr','it'])) { //Type should be followed by an optional '[]' for arrays
-    return Type.forName(match().lexeme)
-  } else {
-    error('Type expected', tokens[0])
-  }
-}
-
 function parseVarDec() {
-  var type = parseType()
-  var id = match('ID')
+  var type 
+  if (at(['Riddle'])) {
+    type = match('Riddle')
+  } else if (at(['Num'])) {
+    type = match('Num')
+  } else if (at(['Str'])) {
+    type = match('Str')
+  } else if (at(['Chr'])) {
+    type = match('Chr')
+  } else if (at(['it'])) {
+    type = match('it')
+  }
 
+  var id = match('ID')
+  var value
   while (at(',')) {
   match(',')
     parseVarDec()
@@ -102,13 +106,13 @@ function parseVarDec() {
     if (at('[')) {
     return parseArrayLit()
     } else {
-      parseExp()
+      value = parseExp()
       while (at(',')) {
-        parseExp()
+        value = parseExp()
       }
     }
   }
-  return new VarDec(id,type)
+  return new VarDec(id, type, value)
 }
 
 function parseClassDec() {

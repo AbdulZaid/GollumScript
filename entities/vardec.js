@@ -1,13 +1,13 @@
 var Type = require('./type')
 
-function VarDec(id, type) {
+function VarDec(id, type, value) {
   this.id = id
   this.type = type
+  this.value = value
 }
 
 VarDec.prototype.toString = function () {
-  return '(Var :' + this.id.lexeme + ' ' + this.type + ')'
-
+  return '(' + this.type.lexeme + ' ' + this.id.lexeme +' '+this.value + ')'
 }
 
 VarDec.prototype.analyze = function (context) {
