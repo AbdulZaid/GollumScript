@@ -52,16 +52,22 @@ var generator = {
     emit(util.format('var %s = %s;', makeVariable(v), initializer))
   },
 
+  'FuncDec': function (d) {
+    emit(util.format('function %s (%s) {', makeVariable(d.name), d.parameters.parameters.join(',')))
+    gen(d.body)
+    emit('}')
+  },
+
   'Assignment': function (s) {
     emit(util.format('%s = %s;', gen(s.target), gen(s.source)))
   },
 
-  'Printes': function (e) {
-    emit(util.format('alert(%s);', gen(e.expression)))
+  'Printes': function (s) {
+    emit(util.format('alert(%s);', gen(s.expression)))
   },
 
   'givesUs': function (s) {
-    emit(util.format('return %s;', gen(e.expression)))
+    emit(util.format('return %s;', gen(s.expression)))
   },
 
   'Whiles': function (s) {

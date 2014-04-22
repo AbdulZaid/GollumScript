@@ -133,12 +133,12 @@ function parseClassDec() {
 }
 
 function parseFuncDec() {
-  var funtype = match()
-  match('ID')
+  match()
+  var name = match('ID').lexeme
   var parameters = parseParamenters()
   var body = parseBlock()
   match('GollumGollum')
-  return new FuncDec(funtype, parameters, body)
+  return new FuncDec(name, parameters, body)
 }
 
 function parseParamenters() {
@@ -274,14 +274,8 @@ function parseIncOp() {
 }
 
 function parseGivesUs() {
-  var result = []
   match('givesUs')
-  result.push(parseExp())
-  if (at(',')) {
-    match()
-    result.push(parseExp())
-  }
-  return new GivesUs(result)
+  return new GivesUs(parseExp())
 }
 
 function parsePrint() {

@@ -1,15 +1,16 @@
-function FuncDec(funtype, params, body) {
-  this.funtype = funtype
-  this.parameters = params
+function FuncDec(name, parameters, body) {
+  this.name = name
+  this.parameters = parameters
   this.body = body
 }
 
 FuncDec.prototype.toString = function () {
-  return '(' + this.funtype.lexeme + ' ' + this.parameters.toString() + ' ' + this.body.toString() + ')'
+  return '(' + this.name + ' ' + this.parameters + ' ' + this.body + ')'
 }
 
 FuncDec.prototype.analyze = function(context) {
-  this.params.analyze(context)
+  // TODO: ADD THE FUNCTION TO THE CONTEXT
+  this.parameters.analyze(context) // TODO add these too (maybe you already did)
   this.body.analyze(context)
 }
 

@@ -7,7 +7,7 @@ givesUs.prototype.toString = function () {
 }
 
 givesUs.prototype.analyze = function (context) {
-  e.analyze(context)
+  this.expression.analyze(context)
 }
 
 givesUs.prototype.optimize = function () {
