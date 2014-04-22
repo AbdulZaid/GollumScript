@@ -285,6 +285,8 @@ function parseExp6() {
     return new IntegerLiteral(match().lexeme)
   } else if (at('StrLit')) {
     return new StringLiteral(match().lexeme)
+  } else if (at('thief')) {
+    return new BooleanLiteral(match())
   } else if (at('ID')) {
     return new VariableReference(match())
   } else if (at('[')) {

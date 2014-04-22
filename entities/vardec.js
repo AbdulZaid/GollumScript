@@ -6,7 +6,6 @@ function VarDec(id, type) {
 }
 
 VarDec.prototype.toString = function () {
-	console.log(this)
   return '(Var :' + this.id.lexeme + ' ' + this.type + ')'
 
 }

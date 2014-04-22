@@ -1,7 +1,7 @@
 var Type = require('./type')
 
-function BooleanLiteral(name) {
-  this.name = "" + name
+function BooleanLiteral(token) {
+  this.token = token
 }
 
 BooleanLiteral.prototype.value = function () {
@@ -9,7 +9,7 @@ BooleanLiteral.prototype.value = function () {
 }
 
 BooleanLiteral.prototype.toString = function () {
-  return this.name
+  return this.token.lexeme
 }
 
 BooleanLiteral.prototype.analyze = function (context) {
