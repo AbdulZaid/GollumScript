@@ -47,9 +47,13 @@ var generator = {
     indentLevel--
   },
 
+  'BasicVar': function (v) {
+    var value = v.value ? gen(v.value) : 'undefined' 
+  },
+
   'VarDec': function (v) {
-    var initializer = {'int': '0', 'bool': 'false'}[v.type]
-    emit(util.format('var %s = %s;', makeVariable(v), initializer))
+    var value = v.value ? gen(v.value) : 'undefined' 
+    emit(util.format('var %s = %s;', makeVariable(v.id), value))
   },
 
   'FuncDec': function (d) {
