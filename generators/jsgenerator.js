@@ -48,7 +48,7 @@ var generator = {
   },
 
   'BasicVar': function (v) {
-    var value = v.value ? gen(v.value) : 'undefined' 
+    var id = v.id ? gen(v.id) : 'undefined' 
   },
 
   'VarDec': function (v) {
@@ -97,6 +97,9 @@ var generator = {
   },
 
   'BinaryExpression': function (e) {
+     //console.log(e.left.constructor.name)
+      //console.log(e.left)
+      //console.log(e.left.name.constructor.name)// This should be an ID and not a String FIX
     return util.format('(%s %s %s)', gen(e.left), makeOp(e.op.lexeme), gen(e.right))
   }
 }
