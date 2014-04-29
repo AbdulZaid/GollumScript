@@ -48,7 +48,9 @@ var generator = {
   },
 
   'BasicVar': function (v) {
-    var id = v.id ? gen(v.id) : 'undefined' 
+    //console.log(v.id)
+   // var id = v.id ?gen(v.id) : 'undefined' 
+    return v.referent
   },
 
   'VarDec': function (v) {

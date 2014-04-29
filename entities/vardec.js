@@ -13,6 +13,7 @@ VarDec.prototype.toString = function () {
 VarDec.prototype.analyze = function (context) {
   context.variableMustNotBeAlreadyDeclared(this.id.lexeme)
   context.addVariable(this.id.lexeme, this)
+  this.value.analyze(context)
 }
 
 VarDec.ARBITRARY = new VarDec('<arbitrary>', Type.ARBITRARY)

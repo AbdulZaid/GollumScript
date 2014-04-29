@@ -14,7 +14,7 @@ Type.FLT = new Type('Flt')
 Type.STR = new Type('Str')
 Type.CHR = new Type('Chr')
 Type.ARR = new Type('Arr')
-Type.ARBITRARY = new Type('<arbitrary_type>')
+Type.ARBITRARY = new Type('it')
 
 Type.prototype.toString = function () {
   return this.name

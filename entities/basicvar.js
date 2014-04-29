@@ -1,13 +1,13 @@
-function BasicVar (name) {
-     this.name = name
+function BasicVar (id) {
+     this.id = {lexeme:id}
 }
 
 BasicVar.prototype.toString = function () {
-    return this.name
+    return this.id
 }
 
 BasicVar.prototype.analyze = function (context) {
-    this.referent = context.lookupVariable(this.name)
+    this.referent = context.lookupVariable(this.id)
     this.type = this.referent.type
 }
 
