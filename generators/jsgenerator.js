@@ -57,6 +57,11 @@ var generator = {
     var value = v.value ? gen(v.value) : 'undefined' 
     emit(util.format('var %s = %s;', makeVariable(v.id), value))
   },
+  'Ifes': function (v) {
+    emit('if (' + gen(s.condition) + ') {')
+    gen(s.body)
+    emit('}')
+  },
 
   'FuncDec': function (d) {
     emit(util.format('function %s (%s) {', makeVariable(d.name), d.parameters.parameters.join(',')))
@@ -69,7 +74,7 @@ var generator = {
   },
 
   'Printes': function (s) {
-    emit(util.format('alert(%s);', gen(s.expression)))
+    emit(util.format('alert(%s);', (s.expression)))
   },
 
   'givesUs': function (s) {

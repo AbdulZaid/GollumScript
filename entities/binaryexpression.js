@@ -35,8 +35,8 @@ BinaryExpression.prototype.toString = function () {
 BinaryExpression.prototype.bothOperandsMustBe = function (type) {
   arb = Type.ARBITRARY.name
 
-  if( (type.name !== this.left.type.kind || type.name !== this.right.type.kind) &&
-      (arb !== this.left.type.kind  || arb !== this.right.type.kind) ){
+  if( (type.name != this.left.type || type.name != this.right.type) &&
+      (arb != this.left.type.kind  || arb != this.right.type.kind) ){
     error('Operands to "' + this.op.lexeme + '" must both have type ' + type, this.op)
   }
 }

@@ -201,30 +201,23 @@ function parseAssignment() {
 }
 
 function parseIfes() {
+  var conditions =[]
+  var body 
+  var ifElsesBodies = []
+  var elseBody
   match('ifes')
-  var condition = parseExp()
-  var body = parseBlock()
-  match('GollumGollum')
-
-  while (at('ifElses')) {
-    match('ifElses')
-    var condition = parseExp()
-    var body = parseBlock()
-    match('GollumGollum')
-    return new Ifes(condition, body)
+  conditions.push(parseExp())
+  body = parseBlock()
+  while (!at('GollumGollum')) {
+    if (at('ifElses')){
+      conditions.push(parseExp())
+      ifElsesBodies.push(parseBlock())
+    }else if(at('elses')){
+      elseBody.push(parseBlock())    
+    }
   }
-  if (at('elses')) {
-    parseElses()
-  }
-  return new Ifes(condition, body)
-}
-//edit this and add it back to parseIfes()
-function parseElses() {
-  match('elses')
-  var condition = parseExp() //should not take a condition. this must deleted.
-  var body = parseBlock()
   match('GollumGollum')
-  return new Ifes(condition, body)
+  return new Ifes(condition, body, ifElsesBodies,elseBody)
 }
 
 function parseWhile() {

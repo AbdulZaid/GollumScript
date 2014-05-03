@@ -1,6 +1,5 @@
-ifes (i % 15 == 0)
+ifes (4 % 15 == 0)
     printes "Blessed"
-GollumGollum
-ifElses (i % 5 == 0)
+ifElses (0 % 5 == 0)
     printes "Smeagol"    
 GollumGollum
