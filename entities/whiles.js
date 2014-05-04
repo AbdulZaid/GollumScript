@@ -6,12 +6,11 @@ function Whiles(condition, body) {
 }
 
 Whiles.prototype.toString = function () {
-  return '(whiles (' + this.condition + ') ' + this.body + ' GollumGollum )'
+  return '(whiles ' + this.condition + ' ' + this.body + ')'
 }
 
 Whiles.prototype.analyze = function (context) {
   this.condition.analyze(context)
-  this.condition.type.mustBeBoolean('Condition in "whiles" statement must be boolean')
   this.body.analyze(context)
 }
 

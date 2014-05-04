@@ -224,9 +224,7 @@ function parseIfes() {
 
 function parseWhile() {
   match('whiles') 
-  match('(')
   var condition = parseExp()
-  match(')')
   var body = parseBlock()
 
   match('GollumGollum')

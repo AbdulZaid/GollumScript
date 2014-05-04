@@ -13,7 +13,7 @@ Ifes.prototype.toString = function () {
     result = result.concat(this.ifElsesBodies[i-1])
   }
   if (this.elseBody) {
-    return result + ', (elses ' + this.elseBody + '))'
+    return result + ', elses ' + this.elseBody +' )'
   } else {
     return result + ')'
   }

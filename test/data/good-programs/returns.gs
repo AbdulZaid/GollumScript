@@ -1,3 +1,3 @@
 makeMagic returns(pounds,inches) 
-	givesUs pounds, inches
+	givesUs inches
 GollumGollum

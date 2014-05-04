@@ -5,12 +5,20 @@ function FuncDec(name, parameters, body) {
 }
 
 FuncDec.prototype.toString = function () {
-  return '(' + this.name + ' ' + this.parameters + ' ' + this.body + ')'
+  var result = '(FuncDec '+ this.name + ' ('
+  if(this.parameters[0]){ 
+    result = result.concat(this.parameters[0])
+    for (var i = 1; i < this.parameters.length; i++) {
+      result = result.concat(', ' + this.parameters[i])
+    }
+  }
+  result = result.concat(') ')
+  result = result.concat(this.body + ')')
+  return result
 }
 
 FuncDec.prototype.analyze = function(context) {
-  // TODO: ADD THE FUNCTION TO THE CONTEXT
-  this.parameters.analyze(context) // TODO add these too (maybe you already did)
+  this.parameters.analyze(context) 
   this.body.analyze(context)
 }
 
