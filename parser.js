@@ -210,14 +210,16 @@ function parseIfes() {
   body = parseBlock()
   while (!at('GollumGollum')) {
     if (at('ifElses')){
+      match('ifElses')
       conditions.push(parseExp())
       ifElsesBodies.push(parseBlock())
     }else if(at('elses')){
+      match('elses')
       elseBody.push(parseBlock())    
     }
   }
   match('GollumGollum')
-  return new Ifes(condition, body, ifElsesBodies,elseBody)
+  return new Ifes(conditions, body, ifElsesBodies,elseBody)
 }
 
 function parseWhile() {
