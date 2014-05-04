@@ -1,13 +1,13 @@
-function IncOp(symbol) {
+function IncOp(symbol, IncOp) {
   this.symbol = symbol
+  this.IncOp = IncOp
 }
-
 IncOp.prototype.toString = function () {
-  return '( ' + this.symbol + ' ' +  ')'
+  return '( ' + this.IncOp +' '+ this.symbol +   ' )'
 }
 
 IncOp.prototype.analyze = function (context) {
-  context.lookupVariable(this.symbol)
+    this.referent = context.lookupVariable(this.symbol)
 }
 
 module.exports = IncOp

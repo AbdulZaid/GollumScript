@@ -1,7 +1,6 @@
 function BasicVar (id) {
      this.id = {lexeme:id}
 }
-
 BasicVar.prototype.toString = function () {
     return this.id
 }

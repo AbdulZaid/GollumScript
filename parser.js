@@ -231,8 +231,6 @@ function parseWhile() {
   return new Whiles(condition, body)
 }
 
-
-//Abdul: Start  working from here next time
 function parseFor() {
   match('revolves') 
   match('(')
@@ -244,26 +242,24 @@ function parseFor() {
   var condition = parseExp()
   match(';')
   var after = []
-  match('ID')
-  after.push(parseIncOp())
+  var afterID = match('ID').lexeme
+  after.push(parseIncOp(afterID))
   match(')')
   var body = parseBlock()
   match('GollumGollum')
   return new Revolves(assignments, condition, after, body)
 }
 
-function parseIncOp() {
+function parseIncOp(afterID) {
   var positive
-  var target // work on the target and use it inside the intity.
+  var target = afterID // work on the target and use it inside the intity.
   if (at('++')) {
     positive = true;
     match('++')
-    // target = parseVar()
   } else if (at('--')) {
-    // target = parseVar()
     match('--')
   }
-  return new IncOp( (positive ? "++" : "--") )
+  return new IncOp(target, (positive ? "++" : "--") )
 }
 
 function parseGivesUs() {
