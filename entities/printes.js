@@ -3,7 +3,8 @@ function Printes(expression) {
 }
 
 Printes.prototype.toString = function () {
-  return '(printes ' + this.expression + ')'
+  var expression = this.expression.id? this.expression.id.lexeme : this.expression
+  return '(printes ' + expression + ')'
 }
 
 Printes.prototype.analyze = function (context) {

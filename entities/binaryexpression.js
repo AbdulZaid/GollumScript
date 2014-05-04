@@ -29,14 +29,17 @@ BinaryExpression.prototype.analyze = function (context) {
 }
 
 BinaryExpression.prototype.toString = function () {
-  return '(' + this.op.lexeme + ' ' + this.left + ' ' + this.right + ')'
+  var left = this.left.id? this.left.id.lexeme : this.left
+  var right = this.right.id? this.right.id.lexeme : this.right
+
+  return '(' + this.op.lexeme + ' ' + left + ' ' + right + ')'
 }
 
 BinaryExpression.prototype.bothOperandsMustBe = function (type) {
   arb = Type.ARBITRARY.name
-
   if( (type.name != this.left.type || type.name != this.right.type) &&
-      (arb != this.left.type.kind  || arb != this.right.type.kind) ){
+      (arb != this.left.type.kind  || arb != this.right.type.kind) && (arb != this.left.type.kind)
+      &&(arb != this.left.type.kind) ){
     error('Operands to "' + this.op.lexeme + '" must both have type ' + type, this.op)
   }
 }

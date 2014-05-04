@@ -10,9 +10,14 @@ Revolves.prototype.toString = function () {
 }
 
 Revolves.prototype.analyze = function (context) {
-  this.declaration.analyze(context)
+
+  for(var i = 0; i < this.declaration.length; i++ ){
+      this.declaration[i].analyze(context)
+  }
   this.condition.analyze(context)
-  this.assignment.analyze(context)
+  for(var i = 0; i < this.assignment.length; i++ ){
+      this.assignment[i].analyze(context)
+  }
   this.body.analyze(context)
 }
 
