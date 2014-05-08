@@ -97,6 +97,12 @@ var generator = {
     emit('}')
   },
 
+  'Whiles': function (s) {
+    emit('while ' + gen(s.condition) + ' {')
+    gen(s.body)
+    emit('}')
+  },
+
  'DottedVar': function (v) {
     return util.format('%s.%s', gen(v.struct), gen(v.property))
   },
