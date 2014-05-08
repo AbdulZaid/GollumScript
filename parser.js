@@ -242,7 +242,7 @@ function parseFor() {
   var condition = parseExp()
   match(';')
   var after = []
-  var afterID = match('ID').lexeme
+  var afterID = match('ID')
   after.push(parseIncOp(afterID))
   match(')')
   var body = parseBlock()

@@ -74,14 +74,14 @@ var generator = {
   },
 
   'Printes': function (s) {
-    emit(util.format('alert(%s);', (s.expression)))
+    emit(util.format('alert(%s);', gen(s.expression)))
   },
 
   'givesUs': function (s) {
     emit(util.format('return %s;', gen(s.expression)))
   },
 
-  'Whiles': function (s) {
+  'Revolves': function (s) {
     emit('while (' + gen(s.condition) + ') {')
     gen(s.body)
     emit('}')
