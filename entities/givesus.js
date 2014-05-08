@@ -3,7 +3,8 @@ function givesUs(expression) {
 }
 
 givesUs.prototype.toString = function () {
-  return '(givesUs ' + this.expression + ')'
+  var expression = this.expression.id? this.expression.id.lexeme : this.expression
+  return '(givesUs ' + expression + ')'
 }
 
 givesUs.prototype.analyze = function (context) {
@@ -11,7 +12,7 @@ givesUs.prototype.analyze = function (context) {
 }
 
 givesUs.prototype.optimize = function () {
-  this.expressions = this.expressions.map(function (e) {return e.optimize()})
+  this.expression = this.expression.optimize()
   return this
 }
 

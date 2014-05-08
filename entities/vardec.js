@@ -7,7 +7,7 @@ function VarDec(id, type, value) {
 }
 
 VarDec.prototype.toString = function () {
-  return '(' + this.type.lexeme + ' ' + this.id.lexeme +' '+this.value + ')'
+  return '(' + this.type.lexeme + ' ' + this.id.lexeme +' '+ this.value + ')'
 }
 
 VarDec.prototype.analyze = function (context) {
