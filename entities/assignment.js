@@ -6,13 +6,13 @@ function Assignment(target, source) {
 }
 
 Assignment.prototype.toString = function () {
-  return '(= ' + this.target + ' ' + this.source + ')'
+  return '(= ' + this.target + ' ' + this.source.lexem + ')'
 }
 
 Assignment.prototype.analyze = function (context) {
   this.target.analyze(context)
   this.source.analyze(context)
-  this.source.type.mustBeCompatibleWith(this.target.type, 'Type mismatch in assignment')
+  //this.source.type.mustBeCompatibleWith(this.target.type, 'Type mismatch in assignment')
 }
 
 Assignment.prototype.optimize = function () {

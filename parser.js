@@ -184,12 +184,17 @@ function parseVar() {
 }
 
 function parseBasicVar () {
-  return new BasicVar(match('ID').lexeme)
+  var name = match('ID')
+  if (name) {
+    return new BasicVar(name.lexeme)
+  } else {
+    error('invalid token')
+  }
 }
 
 function parseDottedVar (struct) {
-  match('.')
-  return new DottedVar(struct.name, match('ID').lexeme)
+   match('.')
+  return new DottedVar(struct, parseBasicVar())
 }
 
 

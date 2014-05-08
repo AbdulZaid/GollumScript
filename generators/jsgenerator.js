@@ -97,6 +97,10 @@ var generator = {
     emit('}')
   },
 
+ 'DottedVar': function (v) {
+    return util.format('%s.%s', gen(v.struct), gen(v.property))
+  },
+
   'IntegerLiteral': function (literal) {
     return literal.toString()
   },
