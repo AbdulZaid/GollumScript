@@ -20,8 +20,6 @@ Ifes.prototype.toString = function () {
 }
 
 Ifes.prototype.analyze = function (context) {
-  this.condition.analyze(context)
-  this.condition.type.mustBeBoolean('Condition in "Ifes" statement must be boolean')
   this.body.analyze(context)
 }
 

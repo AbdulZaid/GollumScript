@@ -57,10 +57,20 @@ var generator = {
     var value = v.value ? gen(v.value) : 'undefined' 
     emit(util.format('var %s = %s;', makeVariable(v.id), value))
   },
+
   'Ifes': function (v) {
-    emit('if (' + gen(s.condition) + ') {')
-    gen(s.body)
-    emit('}')
+    for (var i = 0; i < v.conditions.length; i++) {
+      if (i === 0) {
+        emit('if (' + gen(v.conditions[i]) + ') {')
+        gen(v.body)
+        emit('}')
+      }
+      else {
+        emit('else if'+ gen(v.conditions[i]) + ') {')
+        gen(v.body)
+        emit('}')
+      }
+    }
   },
 
   'FuncDec': function (d) {
@@ -88,6 +98,10 @@ var generator = {
   },
 
   'IntegerLiteral': function (literal) {
+    return literal.toString()
+  },
+
+  'StringLiteral': function (literal) {
     return literal.toString()
   },
 
