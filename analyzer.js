@@ -26,8 +26,10 @@ AnalysisContext.prototype.addVariable = function (name, entity) {
 
 AnalysisContext.prototype.lookupVariable = function (token) {
   var variable = this.symbolTable[token.lexeme]
+  //console.log("hello"+this.symbolTable[token.lexeme])
   if (variable) {
     return variable
+    //console.log (variable == this.symbolTable[name])
   } else if (!this.parent) {
     error('Variable ' + token.lexeme + ' not found', token)
     return VariableDeclaration.ARBITRARY

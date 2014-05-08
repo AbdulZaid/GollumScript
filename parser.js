@@ -252,7 +252,7 @@ function parseFor() {
 
 function parseIncOp(afterID) {
   var positive
-  var target = afterID // work on the target and use it inside the intity.
+  var target = afterID 
   if (at('++')) {
     positive = true;
     match('++')
